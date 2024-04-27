@@ -46,11 +46,12 @@ class _TaskManagerAppState extends State<TaskManagerApp> {
               filled: true,
               fillColor: colorWhite,
               contentPadding:
-                  EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               border: OutlineInputBorder(borderSide: BorderSide.none)),
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 80),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  backgroundColor: colorGreen,
                   elevation: 3,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8))))),
