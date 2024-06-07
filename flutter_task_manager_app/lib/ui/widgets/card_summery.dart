@@ -13,8 +13,8 @@ class CardSummery extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 100,
+    return const SizedBox(
+      width: 120,
       child: Card(
         color: Colors.amberAccent,
         margin: EdgeInsets.symmetric(horizontal:5),

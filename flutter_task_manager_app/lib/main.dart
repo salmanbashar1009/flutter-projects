@@ -24,7 +24,7 @@ class _TaskManagerAppState extends State<TaskManagerApp> {
       title: "Flutter Task Manager",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          brightness: Brightness.light,
+        primaryColor: Colors.green,
           primarySwatch: Colors.green,
           textTheme: const TextTheme(
               titleLarge: TextStyle(

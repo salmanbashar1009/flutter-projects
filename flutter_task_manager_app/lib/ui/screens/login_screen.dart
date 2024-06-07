@@ -4,6 +4,7 @@ import 'package:flutter_task_manager_app/ui/screens/new_task_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/sign_up_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/task_view_navbar_screen.dart';
 import 'package:flutter_task_manager_app/ui/widgets/screen_background.dart';
+import 'package:flutter_task_manager_app/ui/widgets/screen_transition.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -59,9 +60,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushAndRemoveUntil(
+
+                        Navigator.of(context).pushAndRemoveUntil(screenTransition(NewTaskScreen()),(route) => false);
+                       /* Navigator.pushAndRemoveUntil(
                             context, MaterialPageRoute(builder: (context) =>
-                            const CustomizedAppBar()), (route) => false);
+                            const CustomizedAppBar()), (route) => false);*/
                       },
                       child: const Icon(
                         Icons.arrow_forward_ios_rounded,

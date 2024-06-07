@@ -20,7 +20,79 @@ class _CustomizedAppBarState extends State<CustomizedAppBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Material(
+      appBar: AppBar(
+        leading: const Padding(
+          padding: EdgeInsets.only(left:12),
+          child: CircleAvatar(
+            radius: 50,
+            backgroundImage: NetworkImage('https://static.vecteezy.com/system/resources/previews/006/675/345/non_2x/silhouette-of-muslim-man-praying-vector.jpg'),
+          ),
+        ),
+        backgroundColor: colorGreen,
+        title:  Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Salman Bashar',style: Theme.of(context).textTheme.titleMedium ,),
+            Text('salmanbashar@gmail.com',style: Theme.of(context).textTheme.titleSmall),
+          ],
+        ),
+      ),
+      body:_screens[_selectedIndex],
+      bottomNavigationBar: BottomAppBar(
+        padding: const EdgeInsets.all(0),
+        shape: const CircularNotchedRectangle(),
+        height: 80,
+        notchMargin: 6,
+        clipBehavior: Clip.antiAlias,
+        color: colorGreen,
+        child: SizedBox(
+          height: kBottomNavigationBarHeight,
+          child: BottomNavigationBar(
+            backgroundColor: colorGreen,
+            type: BottomNavigationBarType.fixed,
+            currentIndex: _selectedIndex,
+            unselectedItemColor: Colors.white,
+            unselectedLabelStyle: const TextStyle(
+              color: Colors.white,
+            ),
+            showUnselectedLabels: true,
+            selectedItemColor: Colors.yellow,
+            onTap: (int i) {
+              _selectedIndex = i;
+              if (mounted) {
+                setState(() {});
+              }
+            },
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.task), label: "New"),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.bar_chart), label: "In Progress"),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.done), label: "Completed"),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.cancel), label: "Cancelled"),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+        backgroundColor: colorGreen,
+        child: const Icon(
+          Icons.add,
+          color: colorWhite,
+        ),
+        onPressed: () {},
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+    );
+  }
+}
+
+
+/*Material(
         child: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
@@ -86,54 +158,4 @@ class _CustomizedAppBarState extends State<CustomizedAppBar> {
             })),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        padding: EdgeInsets.all(0),
-        shape: CircularNotchedRectangle(),
-        height: 80,
-        notchMargin: 6,
-        clipBehavior: Clip.antiAlias,
-        color: colorGreen,
-        child: SizedBox(
-          height: kBottomNavigationBarHeight,
-          child: BottomNavigationBar(
-            backgroundColor: colorGreen,
-            type: BottomNavigationBarType.fixed,
-            currentIndex: _selectedIndex,
-            unselectedItemColor: Colors.white,
-            unselectedLabelStyle: TextStyle(
-              color: Colors.white,
-            ),
-            showUnselectedLabels: true,
-            selectedItemColor: Colors.yellow,
-            onTap: (int i) {
-              _selectedIndex = i;
-              if (mounted) {
-                setState(() {});
-              }
-            },
-            items: [
-              BottomNavigationBarItem(icon: Icon(Icons.task), label: "New"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.bar_chart), label: "In Progress"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.done), label: "Completed"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.cancel), label: "Cancelled"),
-            ],
-          ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-        backgroundColor: colorGreen,
-        child: Icon(
-          Icons.add,
-          color: colorWhite,
-        ),
-        onPressed: () {},
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-    );
-  }
-}
+      )*/

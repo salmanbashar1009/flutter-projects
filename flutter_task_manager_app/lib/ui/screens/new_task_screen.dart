@@ -20,20 +20,20 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 10),
               child: SizedBox(
-                height: 80,
+                height: 60,
                 width: double.infinity,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 4,
                   itemBuilder: (context, index){
-                    return CardSummery(number: 7, title: "new");
+                    return const CardSummery(number: 7, title: "new");
                   },
                 ),
               ),
             ),
-             Padding(
-               padding: const EdgeInsets.symmetric(horizontal: 16),
-               child: Divider(),
+             const Padding(
+               padding: EdgeInsets.symmetric(horizontal: 16),
+               child: Divider(color: Colors.green,),
              ),
             Expanded(
               child: ListView.builder(
