@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task_manager_app/styles/styles.dart';
-import 'package:flutter_task_manager_app/ui/screens/login_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/splash_screen.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const TaskManagerApp());
@@ -19,12 +19,12 @@ class TaskManagerApp extends StatefulWidget {
 class _TaskManagerAppState extends State<TaskManagerApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       key: TaskManagerApp.globalKey,
       title: "Flutter Task Manager",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.green,
+        primaryColor: Colors.white,
           primarySwatch: Colors.green,
           textTheme: const TextTheme(
               titleLarge: TextStyle(

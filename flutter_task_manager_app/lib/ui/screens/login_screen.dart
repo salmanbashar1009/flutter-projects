@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task_manager_app/styles/styles.dart';
-import 'package:flutter_task_manager_app/ui/screens/new_task_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/sign_up_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/task_view_navbar_screen.dart';
 import 'package:flutter_task_manager_app/ui/widgets/screen_background.dart';
-import 'package:flutter_task_manager_app/ui/widgets/screen_transition.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -23,10 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: const EdgeInsets.all(30),
           child: SingleChildScrollView(
             padding: EdgeInsets.only(
-                top: 5, bottom: MediaQuery
-                .of(context)
-                .viewInsets
-                .bottom),
+                top: 5, bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,10 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Text(
                   "Get Started With",
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .titleLarge,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(
                   height: 25,
@@ -60,11 +53,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-
-                        Navigator.of(context).pushAndRemoveUntil(screenTransition(NewTaskScreen()),(route) => false);
-                       /* Navigator.pushAndRemoveUntil(
-                            context, MaterialPageRoute(builder: (context) =>
-                            const CustomizedAppBar()), (route) => false);*/
+                        Get.offAll(const TaskViewNavBarScreen(),
+                            transition: Transition.rightToLeft);
                       },
                       child: const Icon(
                         Icons.arrow_forward_ios_rounded,
@@ -82,28 +72,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Don't have account?",
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .titleMedium),
+                        style: Theme.of(context).textTheme.titleMedium),
                     InkWell(
                       onTap: () {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const SignUpScreen()),
-                                (route) => false);
+                            (route) => false);
                       },
                       child: Text(
                         " Sign up",
                         style:
-                        Theme
-                            .of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(
-                          color: colorGreen,
-                        ),
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: colorGreen,
+                                ),
                       ),
                     ),
                   ],

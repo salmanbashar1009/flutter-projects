@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_task_manager_app/ui/screens/login_screen.dart';
 import 'package:flutter_task_manager_app/ui/widgets/count_summery.dart';
 import 'package:flutter_task_manager_app/ui/widgets/task_list_tile.dart';
-import 'package:get/get.dart';
 
-class NewTaskScreen extends StatefulWidget {
-  const NewTaskScreen({super.key});
+class CancelledTaskScreen extends StatefulWidget {
+  const CancelledTaskScreen({super.key});
 
   @override
-  State<NewTaskScreen> createState() => _NewTaskScreenState();
+  State<CancelledTaskScreen> createState() => _CancelledTaskScreenState();
 }
 
-class _NewTaskScreenState extends State<NewTaskScreen> {
+class _CancelledTaskScreenState extends State<CancelledTaskScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -25,17 +23,12 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
               child: SizedBox(
                 height: 60,
                 width: double.infinity,
-                child: ListView.separated(
+                child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 4,
                   itemBuilder: (context, index){
                     return const CountSummery(number: 7, title: "new");
                   },
-                  separatorBuilder: (BuildContext context, int index){
-                    return const Divider(
-                      height: 5,
-                    );
-                },
                 ),
               ),
             ),
@@ -47,11 +40,11 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
               child: ListView.separated(
                 itemCount: 20, // Set the item count
                 itemBuilder: (context, index) {
-                  return  TaskListTile(onEditTap: (){},onDeleteTap: (){},);
+                  return TaskListTile(onDeleteTap: (){}, onEditTap: (){});
                 },
                 separatorBuilder: (BuildContext context, int index){
                   return const Divider(height: 5,color: Colors.black12,);
-              },
+                },
               ),
             ),
           ],
@@ -60,6 +53,5 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
     );
   }
 }
-
 
 

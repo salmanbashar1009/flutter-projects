@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task_manager_app/styles/styles.dart';
+import 'package:flutter_task_manager_app/ui/screens/cancelled_task_screen.dart';
+import 'package:flutter_task_manager_app/ui/screens/completed_task_screen.dart';
+import 'package:flutter_task_manager_app/ui/screens/in_progress_task_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/new_task_screen.dart';
-class CustomizedAppBar extends StatefulWidget {
-  const CustomizedAppBar({super.key});
+
+class TaskViewNavBarScreen extends StatefulWidget {
+  const TaskViewNavBarScreen({super.key});
 
   @override
-  State<CustomizedAppBar> createState() => _CustomizedAppBarState();
+  State<TaskViewNavBarScreen> createState() => _TaskViewNavBarScreenState();
 }
 
-class _CustomizedAppBarState extends State<CustomizedAppBar> {
+class _TaskViewNavBarScreenState extends State<TaskViewNavBarScreen> {
   int _selectedIndex = 0;
   final List<Widget> _screens = [
     const NewTaskScreen(),
-    const NewTaskScreen(),
-    const NewTaskScreen(),
-    const NewTaskScreen(),
+    const InprogressTaskScreen(),
+    const CompletedTaskScreen(),
+    const CancelledTaskScreen(),
   ];
 
   @override

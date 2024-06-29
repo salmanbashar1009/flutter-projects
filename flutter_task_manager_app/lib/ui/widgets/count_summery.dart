@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_task_manager_app/styles/styles.dart';
 
-class CardSummery extends StatelessWidget {
+class CountSummery extends StatelessWidget {
 
-  const CardSummery({
+  const CountSummery({
     super.key, required this.number, required this.title,
   });
 
@@ -13,10 +12,9 @@ class CardSummery extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
+    return   const SizedBox(
       width: 120,
       child: Card(
-        color: Colors.amberAccent,
         margin: EdgeInsets.symmetric(horizontal:5),
         shape: RoundedRectangleBorder(),
         elevation: 4,

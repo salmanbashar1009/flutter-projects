@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task_manager_app/styles/styles.dart';
+import 'package:flutter_task_manager_app/ui/screens/login_screen.dart';
 import 'package:flutter_task_manager_app/ui/widgets/screen_background.dart';
+import 'package:get/get.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -74,7 +76,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAll(const LoginScreen(),transition: Transition.rightToLeft);
+                      },
                       child: const Icon(
                         Icons.arrow_forward_ios_rounded,
                         color: colorWhite,
