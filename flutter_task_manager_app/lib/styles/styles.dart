@@ -10,10 +10,11 @@ const colorDarkBlue = Color.fromRGBO(44, 62, 80, 1.0);
 const colorLightGray = Color.fromRGBO(135, 142, 150, 1.0);
 const colorLight = Color.fromRGBO(211, 211, 211, 1.0);
 
-InputDecoration AppInputDecoration(label) {
+InputDecoration appInputDecoration(label,) {
   return InputDecoration(
+    alignLabelWithHint: true,
     labelText: label,
-    labelStyle: const TextStyle(color: Colors.grey),
+    labelStyle: const TextStyle(color: Colors.grey,),
     focusedBorder:
         const OutlineInputBorder(borderSide: BorderSide(color: colorGreen, width: 1)),
   );

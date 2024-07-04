@@ -44,31 +44,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 25,
                 ),
                 TextFormField(
-                  decoration: AppInputDecoration('Email'),
+                  decoration: appInputDecoration('Email'),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 TextFormField(
-                  decoration: AppInputDecoration('First Name'),
+                  decoration: appInputDecoration('First Name'),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 TextFormField(
-                  decoration: AppInputDecoration('Last Name'),
+                  decoration: appInputDecoration('Last Name'),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 TextFormField(
-                  decoration: AppInputDecoration('Mobile'),
+                  decoration: appInputDecoration('Mobile'),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 TextFormField(
-                  decoration: AppInputDecoration('Password'),
+                  decoration: appInputDecoration('Password'),
                 ),
                 const SizedBox(
                   height: 15,
@@ -96,13 +96,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             .of(context)
                             .textTheme
                             .titleMedium),
-                    Text(
-                      " Sign in",
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(color: colorGreen,),
+                    InkWell(
+                      onTap: (){
+                        Get.offAll(const LoginScreen(),transition: Transition.rightToLeft);
+                      },
+                      child: Text(
+                        " Sign in",
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(color: colorGreen,),
+                      ),
                     ),
                   ],
                 )

@@ -38,13 +38,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 25,
                 ),
                 TextFormField(
-                  decoration: AppInputDecoration('Username'),
+                  decoration: appInputDecoration('Username'),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 TextFormField(
-                  decoration: AppInputDecoration('Password'),
+                  decoration: appInputDecoration('Password'),
                 ),
                 const SizedBox(
                   height: 15,
@@ -75,11 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: Theme.of(context).textTheme.titleMedium),
                     InkWell(
                       onTap: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignUpScreen()),
-                            (route) => false);
+                        Get.offAll(const SignUpScreen(), transition: Transition.rightToLeft);
                       },
                       child: Text(
                         " Sign up",

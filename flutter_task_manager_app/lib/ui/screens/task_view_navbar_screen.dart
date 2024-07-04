@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task_manager_app/styles/styles.dart';
+import 'package:flutter_task_manager_app/ui/screens/add_new_task_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/cancelled_task_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/completed_task_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/in_progress_task_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/new_task_screen.dart';
+import 'package:get/get.dart';
 
 class TaskViewNavBarScreen extends StatefulWidget {
   const TaskViewNavBarScreen({super.key});
@@ -37,8 +39,12 @@ class _TaskViewNavBarScreenState extends State<TaskViewNavBarScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Salman Bashar',style: Theme.of(context).textTheme.titleMedium ,),
-            Text('salmanbashar@gmail.com',style: Theme.of(context).textTheme.titleSmall),
+            Text('Salman Bashar',style: Theme.of(context).textTheme.titleMedium!.copyWith(
+              color: Colors.white
+            ) ,),
+            Text('salmanbashar@gmail.com',style: Theme.of(context).textTheme.titleSmall!.copyWith(
+              color: Colors.white
+            )),
           ],
         ),
       ),
@@ -87,7 +93,9 @@ class _TaskViewNavBarScreenState extends State<TaskViewNavBarScreen> {
           Icons.add,
           color: colorWhite,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Get.to(const AddNewTaskScreen(),transition: Transition.rightToLeft);
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
