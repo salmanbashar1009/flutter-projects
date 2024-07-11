@@ -44,6 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 15,
                 ),
                 TextFormField(
+                  obscureText: true,
                   decoration: appInputDecoration('Password'),
                 ),
                 const SizedBox(

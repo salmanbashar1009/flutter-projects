@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task_manager_app/styles/styles.dart';
 import 'package:flutter_task_manager_app/ui/screens/add_new_task_screen.dart';
+import 'package:flutter_task_manager_app/ui/screens/auth/update_profile_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/cancelled_task_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/completed_task_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/in_progress_task_screen.dart';
@@ -28,27 +29,44 @@ class _TaskViewNavBarScreenState extends State<TaskViewNavBarScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: const Padding(
-          padding: EdgeInsets.only(left:12),
+          padding: EdgeInsets.only(left: 12),
           child: CircleAvatar(
             radius: 50,
-            backgroundImage: NetworkImage('https://static.vecteezy.com/system/resources/previews/006/675/345/non_2x/silhouette-of-muslim-man-praying-vector.jpg'),
+            backgroundImage: NetworkImage(
+                'https://static.vecteezy.com/system/resources/previews/006/675/345/non_2x/silhouette-of-muslim-man-praying-vector.jpg'),
           ),
         ),
         backgroundColor: colorGreen,
-        title:  Column(
+        title: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Salman Bashar',style: Theme.of(context).textTheme.titleMedium!.copyWith(
-              color: Colors.white
-            ) ,),
-            Text('salmanbashar@gmail.com',style: Theme.of(context).textTheme.titleSmall!.copyWith(
-              color: Colors.white
-            )),
+            Text(
+              'Salman Bashar',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Colors.white),
+            ),
+            Text('salmanbashar@gmail.com',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(color: Colors.white)),
           ],
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 14),
+            child: IconButton(
+                onPressed: () {
+                  Get.to(const UpdateProfileScreen());
+                },
+                icon: Icon(Icons.edit_note_outlined,color: Colors.white,size: 30,)),
+          )
+        ],
       ),
-      body:_screens[_selectedIndex],
+      body: _screens[_selectedIndex],
       bottomNavigationBar: BottomAppBar(
         padding: const EdgeInsets.all(0),
         shape: const CircularNotchedRectangle(),
@@ -94,15 +112,13 @@ class _TaskViewNavBarScreenState extends State<TaskViewNavBarScreen> {
           color: colorWhite,
         ),
         onPressed: () {
-          Get.to(const AddNewTaskScreen(),transition: Transition.rightToLeft);
+          Get.to(const AddNewTaskScreen(), transition: Transition.rightToLeft);
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-
     );
   }
 }
-
 
 /*Material(
         child: CustomScrollView(

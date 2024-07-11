@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_task_manager_app/ui/screens/login_screen.dart';
 import 'package:flutter_task_manager_app/ui/widgets/count_summery.dart';
 import 'package:flutter_task_manager_app/ui/widgets/task_list_tile.dart';
-import 'package:get/get.dart';
 
 class NewTaskScreen extends StatefulWidget {
   const NewTaskScreen({super.key});
