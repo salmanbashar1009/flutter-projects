@@ -1,7 +1,12 @@
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/home_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_path_holder.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/utility/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OTPVerificationScreen extends StatefulWidget {
   const OTPVerificationScreen({super.key});
@@ -15,77 +20,100 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 130,
-              ),
-              Center(
-                  child: SvgPicture.asset(
-                ImagePathHolder.craftyBayLogoSVG,
-                width: 100,
-              )),
-              const SizedBox(
-                height: 16,
-              ),
-              Text(
-                "Enter OTP Code",
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Text("A 4 digit OTP has been sent",
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium
-                      ?.copyWith(color: Colors.grey)),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                decoration: InputDecoration(
-                    hintText: "OTP",
-                    hintStyle: TextStyle(color: Colors.grey.withOpacity(0.6))),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Next",
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 80,
+                ),
+                Center(
+                    child: SvgPicture.asset(
+                  ImagePathHolder.canvasLogoSVG,
+                  width: 200,
+                )),
+                const SizedBox(
+                  height: 16,
+                ),
+                Text(
+                  "Enter OTP Code",
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text("A 4 digit OTP has been sent",
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium
-                        ?.copyWith(color: Colors.white, fontSize: 18),
+                        ?.copyWith(color: Colors.grey)),
+                const SizedBox(
+                  height: 20,
+                ),
+                PinCodeTextField(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  keyboardType: TextInputType.number,
+                  length: 4,
+                  obscureText: false,
+                  animationType: AnimationType.fade,
+                  pinTheme: AppOTPStyle(),
+                  animationDuration: const Duration(milliseconds: 300),
+                  enableActiveFill: true,
+                  onCompleted: (v) {
+                    print("Completed");
+                  },
+                  onChanged: (value) {
+                    print(value);
+                    setState(() {
+                    });
+                  },
+                  beforeTextPaste: (text) {
+                    print("Allowing to paste $text");
+                    //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+                    //but you can show anything you want here, like your pop up saying wrong paste format or etc
+                    return true;
+                  }, appContext: context,
+                ),
+                const SizedBox(
+                  height: 25,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Get.to(const HomeScreen());
+                    },
+                    child: Text(
+                      "Next",
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(color: Colors.white, fontSize: 18),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              RichText(
-                text: const TextSpan(
-                    style: TextStyle(color: Colors.grey),
-                    children: [
-                      TextSpan(text: 'This code will expire in'),
-                      TextSpan(
-                          text: '120s', style: TextStyle(color: primeColor)),
-                    ]),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: const Text(
-                  "Resend Code",
-                  style: TextStyle(color: Colors.grey),
+                const SizedBox(
+                  height: 20,
                 ),
-              )
-            ],
+                RichText(
+                  text: const TextSpan(
+                      style: TextStyle(color: Colors.grey),
+                      children: [
+                        TextSpan(text: 'This code validity will expire in'),
+                        TextSpan(
+                            text: ' 120s', style: TextStyle(color: primeColor)),
+                      ]),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "Resend Code",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
