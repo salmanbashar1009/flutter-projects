@@ -3,7 +3,6 @@ import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_path_holder.d
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -35,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
           const Spacer(),
           Center(
               child: SvgPicture.asset(ImagePathHolder.canvasLogoSVG,
-                width: 200,
+                width: 150,
               )),
           const Spacer(),
           const CircularProgressIndicator(),

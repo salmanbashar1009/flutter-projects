@@ -3,7 +3,7 @@ import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart'
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-PinTheme AppOTPStyle(){
+PinTheme appOTPStyle(){
   return  PinTheme(
     inactiveColor: ColorPalette.primarySwatch,
     inactiveFillColor: Colors.white,

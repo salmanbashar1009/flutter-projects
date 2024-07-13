@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task_manager_app/styles/styles.dart';
 import 'package:flutter_task_manager_app/ui/screens/login_screen.dart';
+import 'package:flutter_task_manager_app/ui/screens/sign_up_screen.dart';
 import 'package:flutter_task_manager_app/ui/widgets/screen_background.dart';
 import 'package:get/get.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class SetPasswordScreen extends StatefulWidget {
+  const SetPasswordScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SetPasswordScreen> createState() => _SetPasswordScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SetPasswordScreenState extends State<SetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,60 +28,53 @@ class _SignUpScreenState extends State<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 80,
+                  height: 130,
                 ),
                 Text(
-                  "Join With Us",
+                  "Set Password",
                   style: Theme.of(context).textTheme.titleLarge,
+                ),
+                Text(
+                  "Minimum password length 8 character with letter & number",
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: colorLightGray
+                  ),
                 ),
                 const SizedBox(
                   height: 25,
                 ),
                 TextFormField(
-                  decoration: appInputDecoration('Email'),
+                  obscureText: true,
+                  decoration: appInputDecoration('New password'),
                 ),
                 const SizedBox(
-                  height: 15,
+                  height: 12,
                 ),
                 TextFormField(
-                  decoration: appInputDecoration('First Name'),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  decoration: appInputDecoration('Last Name'),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  decoration: appInputDecoration('Mobile'),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  decoration: appInputDecoration('Password'),
+                  obscureText: true,
+                  decoration: appInputDecoration('Confirm password'),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Get.offAll(const LoginScreen(),
-                            transition: Transition.rightToLeft);
-                      },
-                      child: const Icon(
-                        Icons.arrow_forward_ios_rounded,
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Get.offAll(const LoginScreen(),
+                        transition: Transition.rightToLeft,
+                        duration: const Duration(milliseconds: 500));
+                  },
+                  child: const Text(
+                    "Confirm",
+                    style: TextStyle(
                         color: colorWhite,
-                        size: 26,
-                      ),
-                    )),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500),
+                  ),
+                )),
                 const SizedBox(
-                  height: 60,
+                  height: 75,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -89,9 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         style: Theme.of(context).textTheme.titleMedium),
                     InkWell(
                       onTap: () {
-                        Get.offAll(const LoginScreen(),
-                            transition: Transition.rightToLeft,
-                            duration: const Duration(milliseconds: 500));
+                        Get.offAll(const LoginScreen(), transition: Transition.rightToLeft);
                       },
                       child: Text(
                         " Sign in",

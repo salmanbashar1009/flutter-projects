@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task_manager_app/styles/styles.dart';
+import 'package:flutter_task_manager_app/ui/screens/auth/otp_verification_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/login_screen.dart';
+import 'package:flutter_task_manager_app/ui/screens/sign_up_screen.dart';
+import 'package:flutter_task_manager_app/ui/screens/task_view_navbar_screen.dart';
 import 'package:flutter_task_manager_app/ui/widgets/screen_background.dart';
 import 'package:get/get.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class EmailVerificationScreen extends StatefulWidget {
+  const EmailVerificationScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<EmailVerificationScreen> createState() => _EmailVerificationScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,41 +30,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 80,
+                  height: 130,
                 ),
                 Text(
-                  "Join With Us",
+                  "Enter Email Address",
                   style: Theme.of(context).textTheme.titleLarge,
+                ),
+                Text(
+                  "A 6 digit verification PIN will be sent to your email ",
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: colorLightGray
+                  ),
                 ),
                 const SizedBox(
                   height: 25,
                 ),
                 TextFormField(
+                  obscureText: true,
                   decoration: appInputDecoration('Email'),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  decoration: appInputDecoration('First Name'),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  decoration: appInputDecoration('Last Name'),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  decoration: appInputDecoration('Mobile'),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  decoration: appInputDecoration('Password'),
                 ),
                 const SizedBox(
                   height: 15,
@@ -70,8 +56,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Get.offAll(const LoginScreen(),
-                            transition: Transition.rightToLeft);
+                        Get.offAll(const OTPVerificationScreen(),
+                            transition: Transition.rightToLeft, duration: const Duration(milliseconds: 500));
                       },
                       child: const Icon(
                         Icons.arrow_forward_ios_rounded,
@@ -80,7 +66,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     )),
                 const SizedBox(
-                  height: 60,
+                  height: 75,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -89,8 +75,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         style: Theme.of(context).textTheme.titleMedium),
                     InkWell(
                       onTap: () {
-                        Get.offAll(const LoginScreen(),
-                            transition: Transition.rightToLeft,
+                        Get.offAll(const LoginScreen(), transition: Transition.rightToLeft,
                             duration: const Duration(milliseconds: 500));
                       },
                       child: Text(

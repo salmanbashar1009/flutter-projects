@@ -5,6 +5,7 @@ import 'package:flutter_task_manager_app/ui/screens/auth/update_profile_screen.d
 import 'package:flutter_task_manager_app/ui/screens/cancelled_task_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/completed_task_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/in_progress_task_screen.dart';
+import 'package:flutter_task_manager_app/ui/screens/login_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/new_task_screen.dart';
 import 'package:get/get.dart';
 
@@ -56,13 +57,32 @@ class _TaskViewNavBarScreenState extends State<TaskViewNavBarScreen> {
           ],
         ),
         actions: [
+          IconButton(
+              onPressed: () {
+                Get.to(const UpdateProfileScreen(),
+                    transition: Transition.rightToLeft,
+                    duration: const Duration(milliseconds: 500));
+              },
+              icon: const Icon(
+                Icons.account_circle,
+                color: Colors.white,
+                size: 30,
+              ),
+          ),
           Padding(
-            padding: const EdgeInsets.only(right: 14),
+            padding: const EdgeInsets.only(right: 16),
             child: IconButton(
                 onPressed: () {
-                  Get.to(const UpdateProfileScreen());
+                  Get.to(const LoginScreen(),
+                      transition: Transition.rightToLeft,
+                      duration: const Duration(milliseconds: 500));
                 },
-                icon: Icon(Icons.edit_note_outlined,color: Colors.white,size: 30,)),
+                icon: const Icon(
+                  Icons.refresh,
+                  color: Colors.white,
+                  size: 30,
+                ),
+            ),
           )
         ],
       ),

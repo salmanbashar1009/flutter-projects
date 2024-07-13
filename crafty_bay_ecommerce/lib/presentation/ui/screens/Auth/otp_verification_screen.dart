@@ -1,4 +1,6 @@
-import 'package:crafty_bay_ecommerce/presentation/ui/screens/home_screen.dart';
+import 'dart:async';
+
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/Auth/complete_profile.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_path_holder.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/style.dart';
@@ -16,6 +18,39 @@ class OTPVerificationScreen extends StatefulWidget {
 }
 
 class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
+  late Timer _timer;
+  int _start = 120;
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+          (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +66,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                 Center(
                     child: SvgPicture.asset(
                   ImagePathHolder.canvasLogoSVG,
-                  width: 200,
+                  width: 100,
                 )),
                 const SizedBox(
                   height: 16,
@@ -57,19 +92,12 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                   length: 4,
                   obscureText: false,
                   animationType: AnimationType.fade,
-                  pinTheme: AppOTPStyle(),
+                  pinTheme: appOTPStyle(),
                   animationDuration: const Duration(milliseconds: 300),
                   enableActiveFill: true,
                   onCompleted: (v) {
-                    print("Completed");
-                  },
-                  onChanged: (value) {
-                    print(value);
-                    setState(() {
-                    });
                   },
                   beforeTextPaste: (text) {
-                    print("Allowing to paste $text");
                     //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
                     //but you can show anything you want here, like your pop up saying wrong paste format or etc
                     return true;
@@ -82,7 +110,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Get.to(const HomeScreen());
+                      Get.offAll(const CompleteProfileScreen(),transition: Transition.rightToLeft);
                     },
                     child: Text(
                       "Next",
@@ -97,12 +125,12 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                   height: 20,
                 ),
                 RichText(
-                  text: const TextSpan(
-                      style: TextStyle(color: Colors.grey),
+                  text:  TextSpan(
+                      style: const TextStyle(color: Colors.grey),
                       children: [
-                        TextSpan(text: 'This code validity will expire in'),
+                        const TextSpan(text: 'This code validity will expire in'),
                         TextSpan(
-                            text: ' 120s', style: TextStyle(color: primeColor)),
+                            text: " $_start s", style: const TextStyle(color: primeColor)),
                       ]),
                 ),
                 TextButton(

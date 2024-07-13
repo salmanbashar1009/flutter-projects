@@ -25,7 +25,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 Center(
                     child: SvgPicture.asset(
                   ImagePathHolder.canvasLogoSVG,
-                  width: 200,
+                  width: 100,
                 )),
                 const SizedBox(height: 16,),
                 Text("Welcome Back",style: Theme.of(context).textTheme.titleLarge,),
@@ -36,6 +36,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 const SizedBox(height: 20,),
                 TextFormField(
                   decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(12),
                     hintText: "Email Address",
                     hintStyle: TextStyle(color: Colors.grey.withOpacity(0.6))
                   ),

@@ -1,7 +1,8 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_task_manager_app/styles/styles.dart';
+import 'package:flutter_task_manager_app/ui/screens/new_task_screen.dart';
+import 'package:flutter_task_manager_app/ui/screens/task_view_navbar_screen.dart';
 import 'package:flutter_task_manager_app/ui/widgets/screen_background.dart';
 import 'package:get/get.dart';
 
@@ -43,7 +44,8 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Get.back();
+                        Get.offAll(const TaskViewNavBarScreen(),transition: Transition.rightToLeft,
+                            duration: const Duration(milliseconds: 500));
                       },
                       child: Text('Save',style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         color: Colors.white,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task_manager_app/styles/styles.dart';
+import 'package:flutter_task_manager_app/ui/screens/auth/email_verification_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/sign_up_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/task_view_navbar_screen.dart';
 import 'package:flutter_task_manager_app/ui/widgets/screen_background.dart';
@@ -66,9 +67,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 75,
                 ),
-                const Center(
-                    child: Text("Forget Password?",
-                        style: TextStyle(color: colorLightGray))),
+                InkWell(
+                  onTap: () {
+                    Get.to(const EmailVerificationScreen(),
+                        transition: Transition.rightToLeft,
+                        duration: const Duration(milliseconds: 500));
+                  },
+                  child: const Center(
+                      child: Text("Forget Password?",
+                          style: TextStyle(color: colorLightGray))),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -76,7 +84,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: Theme.of(context).textTheme.titleMedium),
                     InkWell(
                       onTap: () {
-                        Get.offAll(const SignUpScreen(), transition: Transition.rightToLeft);
+                        Get.offAll(const SignUpScreen(),
+                            transition: Transition.rightToLeft,
+                            duration: const Duration(milliseconds: 500));
                       },
                       child: Text(
                         " Sign up",

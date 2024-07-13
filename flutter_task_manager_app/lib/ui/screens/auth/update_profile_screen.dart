@@ -52,15 +52,15 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             color: Colors.grey,
                             borderRadius: BorderRadius.circular(6),
                           ),
-                          child: Center(
+                          child: const Center(
                               child: Text(
                             "photo",
                             style: TextStyle(color: Colors.white),
                           )),
                         ),
                         const Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
+                        const Padding(
+                          padding: EdgeInsets.only(right: 8.0),
                           child: Icon(
                             Icons.upload,
                             color: Colors.green,
