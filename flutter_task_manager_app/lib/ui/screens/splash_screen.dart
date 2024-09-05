@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_task_manager_app/data/models/auth_utility.dart';
 import 'package:flutter_task_manager_app/ui/screens/login_screen.dart';
+import 'package:flutter_task_manager_app/ui/screens/task_view_navbar_screen.dart';
 import 'package:flutter_task_manager_app/ui/utils/assets_utils.dart';
 import 'package:flutter_task_manager_app/ui/widgets/screen_background.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,9 +23,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
 
-  void navigateToLoginScreen() {
+  Future<void> navigateToLoginScreen() async {
+    final isLoggedIn = await AuthUtility.checkIfUserLoggedIn();
+
     Future.delayed(const Duration(seconds: 3)).then((value) async => {
-    Get.offAll(const LoginScreen(),
+    Get.offAll(isLoggedIn? const TaskViewNavBarScreen() : const LoginScreen(),
     transition: Transition.rightToLeft,
     duration: const Duration(milliseconds: 500))
         });

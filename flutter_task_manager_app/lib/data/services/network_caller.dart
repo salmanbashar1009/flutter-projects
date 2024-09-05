@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter_task_manager_app/data/models/auth_utility.dart';
 import 'package:flutter_task_manager_app/data/models/network_response.dart';
 import 'package:http/http.dart';
 
@@ -23,7 +24,7 @@ class NetworkCaller {
   Future<NetworkResponse> postRequest(url, Map<String, dynamic> body) async {
     try {
       Response response = await post(Uri.parse(url),
-          headers: {"Content-Type": "application/json"},
+          headers: {"Content-Type": "application/json","token" : AuthUtility.userInfo.token.toString()},
           body: jsonEncode(body));
       if (response.statusCode == 200) {
         return NetworkResponse(

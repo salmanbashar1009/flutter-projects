@@ -3,7 +3,8 @@ import 'package:flutter_task_manager_app/styles/styles.dart';
 import 'package:flutter_task_manager_app/ui/screens/splash_screen.dart';
 import 'package:get/get.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const TaskManagerApp());
 }
 
@@ -48,6 +49,9 @@ class _TaskManagerAppState extends State<TaskManagerApp> {
               contentPadding:
                   EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               border: OutlineInputBorder(borderSide: BorderSide.none)),
+          progressIndicatorTheme: const ProgressIndicatorThemeData(
+            color: colorGreen
+          ),
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 8),

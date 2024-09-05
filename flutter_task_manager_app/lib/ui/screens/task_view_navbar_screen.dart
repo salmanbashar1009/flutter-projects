@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_task_manager_app/data/models/auth_utility.dart';
 import 'package:flutter_task_manager_app/styles/styles.dart';
 import 'package:flutter_task_manager_app/ui/screens/add_new_task_screen.dart';
-import 'package:flutter_task_manager_app/ui/screens/auth/update_profile_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/cancelled_task_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/completed_task_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/in_progress_task_screen.dart';
@@ -29,60 +29,43 @@ class _TaskViewNavBarScreenState extends State<TaskViewNavBarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Padding(
+        backgroundColor: colorGreen,
+        leading:  const Padding(
           padding: EdgeInsets.only(left: 12),
           child: CircleAvatar(
             radius: 50,
             backgroundImage: NetworkImage(
-                'https://static.vecteezy.com/system/resources/previews/006/675/345/non_2x/silhouette-of-muslim-man-praying-vector.jpg'),
+                "https://img.freepik.com/premium-photo/shadow-man-illustration_941493-188.jpg",
+            ),
           ),
         ),
-        backgroundColor: colorGreen,
         title: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Salman Bashar',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(color: Colors.white),
+              "${AuthUtility.userInfo.data?.firstName ?? ' '} ${AuthUtility.userInfo.data?.lastName ?? ' '}",
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: colorWhite
+              ),
             ),
-            Text('salmanbashar@gmail.com',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall!
-                    .copyWith(color: Colors.white)),
+            Text(AuthUtility.userInfo.data?.email ?? "unknown",
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  color: colorWhite
+                )),
           ],
         ),
         actions: [
-          IconButton(
-              onPressed: () {
-                Get.to(const UpdateProfileScreen(),
-                    transition: Transition.rightToLeft,
-                    duration: const Duration(milliseconds: 500));
-              },
-              icon: const Icon(
-                Icons.account_circle,
-                color: Colors.white,
-                size: 30,
-              ),
-          ),
           Padding(
-            padding: const EdgeInsets.only(right: 16),
+            padding: const EdgeInsets.only(right: 12),
             child: IconButton(
                 onPressed: () {
-                  Get.to(const LoginScreen(),
+                  AuthUtility.clearUserInfo();
+                  Get.offAll(const LoginScreen(),
                       transition: Transition.rightToLeft,
                       duration: const Duration(milliseconds: 500));
                 },
-                icon: const Icon(
-                  Icons.refresh,
-                  color: Colors.white,
-                  size: 30,
-                ),
-            ),
+                icon: const Icon(Icons.logout,color: colorWhite,)),
           )
         ],
       ),
@@ -139,71 +122,3 @@ class _TaskViewNavBarScreenState extends State<TaskViewNavBarScreen> {
     );
   }
 }
-
-/*Material(
-        child: CustomScrollView(
-          slivers: <Widget>[
-            SliverAppBar(
-              title: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      radius: 24,
-                      backgroundImage: NetworkImage(
-                          "https://blog.playstation.com/tachyon/2022/06/0c3c20a8d8514501524a0859461f391572ea6e61.jpg"),
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          "Habibul Bashar",
-                          style: TextStyle(color: colorWhite, fontSize: 16),
-                        ),
-                        Text("bashar@gmail.com",
-                            style: TextStyle(color: colorWhite, fontSize: 12)),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              forceMaterialTransparency: false,
-              scrolledUnderElevation: 5,
-              expandedHeight: 180.0,
-              collapsedHeight: 60,
-              pinned: true,
-              flexibleSpace: FlexibleSpaceBar(
-                centerTitle: false,
-                titlePadding: EdgeInsets.all(0),
-                expandedTitleScale: 1.5,
-                background: Image.network(
-                  "https://i.pinimg.com/originals/da/06/07/da06070e6610eed218c124b384d80587.jpg",
-                  fit: BoxFit.cover,
-                ),
-              ),
-              backgroundColor: Colors.green,
-              actions: const [
-                Padding(
-                  padding: EdgeInsets.only(right: 14),
-                  child: Icon(
-                    Icons.refresh,
-                    color: colorWhite,
-                  ),
-                )
-              ],
-            ),
-            SliverList(
-                delegate: SliverChildBuilderDelegate(childCount: 20,
-                    (context, index) {
-              return const ListTile(
-                title: Text("Tahmin"),
-                subtitle:
-                    Text("I am a student"), // Display the name in ListTile
-              );
-            })),
-          ],
-        ),
-      )*/
