@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_task_manager_app/data/models/network_response.dart';
 import 'package:flutter_task_manager_app/data/services/network_caller.dart';
 import 'package:flutter_task_manager_app/data/utils/urls.dart';
 import 'package:flutter_task_manager_app/styles/styles.dart';
 import 'package:flutter_task_manager_app/ui/widgets/screen_background.dart';
+import 'package:get/get.dart';
 
 class AddNewTaskScreen extends StatefulWidget {
   const AddNewTaskScreen({super.key});
@@ -104,7 +104,6 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
                           onPressed: () {
                             FocusScope.of(context).unfocus();
                             addNewTask();
-                            print(_titleTEController.text);
                           },
                           child: Text(
                             'Save',

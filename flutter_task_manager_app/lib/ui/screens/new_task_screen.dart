@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_task_manager_app/data/models/count_summery_model.dart';
+import 'package:flutter_task_manager_app/data/models/network_response.dart';
+import 'package:flutter_task_manager_app/data/models/task_list_model.dart';
+import 'package:flutter_task_manager_app/data/services/network_caller.dart';
+import 'package:flutter_task_manager_app/data/utils/urls.dart';
 import 'package:flutter_task_manager_app/ui/widgets/count_summery.dart';
 import 'package:flutter_task_manager_app/ui/widgets/task_list_tile.dart';
+import 'package:flutter_task_manager_app/ui/widgets/update_task_status_dialogue_sheet.dart';
 
 class NewTaskScreen extends StatefulWidget {
   const NewTaskScreen({super.key});
@@ -10,46 +16,127 @@ class NewTaskScreen extends StatefulWidget {
 }
 
 class _NewTaskScreenState extends State<NewTaskScreen> {
+  CountSummaryModal _countSummaryModel = CountSummaryModal();
+  TaskListModel _taskListModel = TaskListModel();
+  bool _getCountSummeryProgress = false;
+  bool _getNewTaskProgress = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      getCountSummery();
+      getNewTask();
+    });
+  }
+
+  Future<void> getCountSummery() async {
+    _getCountSummeryProgress = true;
+    if (mounted) {
+      setState(() {});
+    }
+
+    NetworkResponse response =
+        await NetworkCaller().getRequest(Urls.taskStatusCount);
+    _getCountSummeryProgress = false;
+    if (mounted) {
+      setState(() {});
+    }
+
+    if (response.isSuccess) {
+      _countSummaryModel = CountSummaryModal.fromJson(response.body!);
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("Failed! Try again")));
+      }
+    }
+  }
+
+  Future<void> getNewTask() async {
+    _getNewTaskProgress = true;
+    if (mounted) {
+      setState(() {});
+    }
+    NetworkResponse response = await NetworkCaller().getRequest(Urls.newTasks);
+    _getNewTaskProgress = false;
+    if (mounted) {
+      setState(() {});
+    }
+    if (response.isSuccess) {
+      _taskListModel = TaskListModel.fromJson(response.body!);
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("Failed! Try again")));
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 10),
-              child: SizedBox(
-                height: 60,
-                width: double.infinity,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 4,
-                  itemBuilder: (context, index){
-                    return const CountSummery(number: 7, title: "new");
-                  },
-                  separatorBuilder: (BuildContext context, int index){
-                    return const Divider(
-                      height: 5,
-                    );
-                },
-                ),
-              ),
+            const SizedBox(
+              height: 15,
             ),
-             const Padding(
-               padding: EdgeInsets.symmetric(horizontal: 16),
-               child: Divider(color: Colors.green,),
-             ),
+            SizedBox(
+              height: 50,
+              width: double.infinity,
+              child: _getCountSummeryProgress
+                  ? const Center(child: LinearProgressIndicator())
+                  : ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _countSummaryModel.data?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        return CountSummery(
+                            number: _countSummaryModel.data![index].sum ?? 0,
+                            title: _countSummaryModel.data![index].sId ??
+                                "Error!");
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const Divider(
+                          height: 5,
+                        );
+                      },
+                    ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Divider(
+              color: Colors.green,
+            ),
             Expanded(
-              child: ListView.separated(
-                itemCount: 20, // Set the item count
-                itemBuilder: (context, index) {
-                  return  TaskListTile(onEditTap: (){},onDeleteTap: (){},);
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  getNewTask();
                 },
-                separatorBuilder: (BuildContext context, int index){
-                  return const Divider(height: 5,color: Colors.black12,);
-              },
+                child: _getNewTaskProgress
+                    ? const Center(child: CircularProgressIndicator())
+                    : ListView.separated(
+                            itemCount:
+                                _taskListModel.data?.length ?? 0, // Set the item count
+                            itemBuilder: (context, index) {
+                              return TaskListTile(
+                                onEditTap: () {
+
+                                },
+                                onDeleteTap: () {},
+                                data: _taskListModel.data![index],
+                              );
+                            },
+                            separatorBuilder: (BuildContext context, int index) {
+                              return const Divider(
+                                height: 5,
+                                color: Colors.black12,
+                              );
+                            },
+                          ),
               ),
             ),
           ],
@@ -58,6 +145,3 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
     );
   }
 }
-
-
-

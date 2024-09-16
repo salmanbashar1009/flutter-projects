@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_task_manager_app/ui/widgets/count_summery.dart';
+import 'package:flutter_task_manager_app/data/models/network_response.dart';
+import 'package:flutter_task_manager_app/data/models/task_list_model.dart';
+import 'package:flutter_task_manager_app/data/services/network_caller.dart';
+import 'package:flutter_task_manager_app/data/utils/urls.dart';
 import 'package:flutter_task_manager_app/ui/widgets/task_list_tile.dart';
 
 class CancelledTaskScreen extends StatefulWidget {
@@ -10,48 +13,66 @@ class CancelledTaskScreen extends StatefulWidget {
 }
 
 class _CancelledTaskScreenState extends State<CancelledTaskScreen> {
+  bool _getCancelledTaskProgress = false;
+  TaskListModel _taskListModel = TaskListModel();
+
+  @override
+  void initState() {
+    getCancelledTask();
+    super.initState();
+  }
+
+  Future<void> getCancelledTask() async {
+    _getCancelledTaskProgress = true;
+    if (mounted) {
+      setState(() {});
+    }
+    NetworkResponse response =
+        await NetworkCaller().getRequest(Urls.cancelledTasks);
+    if (response.isSuccess) {
+      _taskListModel = TaskListModel.fromJson(response.body!);
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("Failed! Try again")));
+      }
+    }
+    _getCancelledTaskProgress = false;
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 10),
-              child: SizedBox(
-                height: 60,
-                width: double.infinity,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 4,
-                  itemBuilder: (context, index){
-                    return const CountSummery(number: 7, title: "new");
+        child: RefreshIndicator(
+                  onRefresh: () async{
+        getCancelledTask();
                   },
+                  child: _getCancelledTaskProgress
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView.separated(
+              itemCount: _taskListModel.data!.length, // Set the item count
+              itemBuilder: (context, index) {
+                return TaskListTile(
+                  onDeleteTap: () {},
+                  onEditTap: () {},
+                  data: _taskListModel.data![index],
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return const Divider(
+                  height: 5,
+                  color: Colors.black12,
+                );
+              },
+            ),
                 ),
-              ),
-            ),
-             const Padding(
-               padding: EdgeInsets.symmetric(horizontal: 16),
-               child: Divider(color: Colors.green,),
-             ),
-            Expanded(
-              child: ListView.separated(
-                itemCount: 20, // Set the item count
-                itemBuilder: (context, index) {
-                  return TaskListTile(onDeleteTap: (){}, onEditTap: (){});
-                },
-                separatorBuilder: (BuildContext context, int index){
-                  return const Divider(height: 5,color: Colors.black12,);
-                },
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
 }
-
-

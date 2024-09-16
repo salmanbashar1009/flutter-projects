@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> navigateToLoginScreen() async {
     final isLoggedIn = await AuthUtility.checkIfUserLoggedIn();
 
-    Future.delayed(const Duration(seconds: 3)).then((value) async => {
+    Future.delayed(const Duration(seconds: 2)).then((value) async => {
     Get.offAll(isLoggedIn? const TaskViewNavBarScreen() : const LoginScreen(),
     transition: Transition.rightToLeft,
     duration: const Duration(milliseconds: 500))

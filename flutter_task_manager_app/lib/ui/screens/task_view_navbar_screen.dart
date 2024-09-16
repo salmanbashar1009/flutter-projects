@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_task_manager_app/data/models/auth_utility.dart';
 import 'package:flutter_task_manager_app/styles/styles.dart';
 import 'package:flutter_task_manager_app/ui/screens/add_new_task_screen.dart';
+import 'package:flutter_task_manager_app/ui/screens/auth/update_profile_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/cancelled_task_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/completed_task_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/in_progress_task_screen.dart';
@@ -25,19 +26,31 @@ class _TaskViewNavBarScreenState extends State<TaskViewNavBarScreen> {
     const CancelledTaskScreen(),
   ];
 
+  Widget profileImageHolder() {
+    final userPhotoUrl = AuthUtility.userInfo.data?.photo;
+
+    if (userPhotoUrl == null || userPhotoUrl.isEmpty) {
+      // If no photo URL is available, show the default "image" icon.
+      return const Icon(Icons.image,color: Colors.white,);
+    } else {
+      // Otherwise, load the user's photo using NetworkImage.
+      return CircleAvatar(
+        backgroundImage: NetworkImage(userPhotoUrl),
+        // You can customize the avatar size and other properties here.
+        radius: 50.0,
+      );
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorGreen,
-        leading:  const Padding(
-          padding: EdgeInsets.only(left: 12),
-          child: CircleAvatar(
-            radius: 50,
-            backgroundImage: NetworkImage(
-                "https://img.freepik.com/premium-photo/shadow-man-illustration_941493-188.jpg",
-            ),
-          ),
+        leading:   Padding(
+          padding: const EdgeInsets.only(left: 12),
+          child: profileImageHolder(),
         ),
         title: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -60,13 +73,24 @@ class _TaskViewNavBarScreenState extends State<TaskViewNavBarScreen> {
             padding: const EdgeInsets.only(right: 12),
             child: IconButton(
                 onPressed: () {
+                  Get.to(const UpdateProfileScreen(),
+                      transition: Transition.rightToLeft,
+                      duration: const Duration(milliseconds: 500));
+                },
+                icon: const Icon(Icons.account_circle,color: colorWhite,)),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: IconButton(
+                onPressed: () {
                   AuthUtility.clearUserInfo();
                   Get.offAll(const LoginScreen(),
                       transition: Transition.rightToLeft,
                       duration: const Duration(milliseconds: 500));
                 },
                 icon: const Icon(Icons.logout,color: colorWhite,)),
-          )
+          ),
+
         ],
       ),
       body: _screens[_selectedIndex],

@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_task_manager_app/data/models/task_list_model.dart';
+import 'package:flutter_task_manager_app/ui/widgets/update_task_status_dialogue_sheet.dart';
 
 class TaskListTile extends StatelessWidget {
   final VoidCallback onDeleteTap, onEditTap;
+  final TaskData data;
 
   const TaskListTile({
     super.key,
     required this.onDeleteTap,
-    required this.onEditTap,
+    required this.onEditTap, required this.data,
   });
 
   Color getStatusColor(String status) {
-    switch (status.toLowerCase()) {
-      case 'new':
+    switch (status) {
+      case 'New':
         return Colors.blue;
-      case 'in progress':
+      case 'Progress':
         return Colors.orange;
-      case 'completed':
+      case 'Complete':
         return Colors.green;
-      case 'cancelled':
+      case 'Cancel':
         return Colors.red;
       default:
         return Colors.grey;
@@ -27,14 +30,14 @@ class TaskListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: const Text("Tahmin"),
+      title:  Text(data.title ?? "Unknown"),
       subtitle: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-              "task description task descriptiontask descriptiontask descriptiontask description"),
-          const Text("15 July 2024"),
+           Text(
+              data.description ?? " "),
+           Text(data.createdDate ?? " "),
           const SizedBox(
             height: 6,
           ),
@@ -42,15 +45,20 @@ class TaskListTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Chip(
-                label: const Text(
-                  "Status",
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500,color: Colors.white),
+              InkWell(
+                onTap: (){
+                  UpdateTaskStatusDialogueSheet(task: data);
+                },
+                child: Chip(
+                  label:  Text(
+                    data.status ?? " ",
+                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500,color: Colors.white),
+                  ),
+                  backgroundColor: getStatusColor(data.status ?? " "),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                      side: const BorderSide(style: BorderStyle.none)),
                 ),
-                backgroundColor: getStatusColor("New"),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                    side: const BorderSide(style: BorderStyle.none)),
               ),
               const Spacer(),
               IconButton(

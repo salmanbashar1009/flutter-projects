@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
     };
 
     final NetworkResponse response =
-        await NetworkCaller().postRequest(Urls.login, requestBody);
+        await NetworkCaller().postRequest(Urls.login, requestBody,isLogin: true);
 
     if (response.isSuccess) {
       LoginModel model = LoginModel.fromJson(response.body!);
