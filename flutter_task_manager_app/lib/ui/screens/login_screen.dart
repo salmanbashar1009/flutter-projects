@@ -8,6 +8,7 @@ import 'package:flutter_task_manager_app/styles/styles.dart';
 import 'package:flutter_task_manager_app/ui/screens/auth/email_verification_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/sign_up_screen.dart';
 import 'package:flutter_task_manager_app/ui/screens/task_view_navbar_screen.dart';
+import 'package:flutter_task_manager_app/ui/state_managers/login_controller.dart';
 import 'package:flutter_task_manager_app/ui/widgets/screen_background.dart';
 import 'package:get/get.dart';
 
@@ -19,52 +20,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _isLoginProgress = false;
-
   final TextEditingController _emailTEController = TextEditingController();
   final TextEditingController _passwordTEController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  Future<void> userLogin() async {
-    _isLoginProgress = true;
-    if (mounted) {
-      setState(() {});
-    }
-
-    Map<String, dynamic> requestBody = {
-      "email": _emailTEController.text.trim(),
-      "password": _passwordTEController.text.trim()
-    };
-
-    final NetworkResponse response =
-        await NetworkCaller().postRequest(Urls.login, requestBody,isLogin: true);
-
-    if (response.isSuccess) {
-      LoginModel model = LoginModel.fromJson(response.body!);
-      await AuthUtility.saveUserInfo(model);
-
-      Get.offAll(const TaskViewNavBarScreen(),
-          transition: Transition.rightToLeft);
-
-      if (mounted) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("Login success")));
-      }
-    } else {
-      _emailTEController.clear();
-      _passwordTEController.clear();
-      _isLoginProgress = false;
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Login failed! Try again")));
-        setState(() {
-
-        });
-      }
-
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,26 +79,44 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 15,
                   ),
-                  SizedBox(
-                      width: double.infinity,
-                      child: Visibility(
-                        visible: _isLoginProgress == false,
-                        replacement: const Center(child: CircularProgressIndicator(),),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            FocusScope.of(context).unfocus();
-                            if(!_formKey.currentState!.validate()){
-                              return;
-                            }
-                            userLogin();
-                          },
-                          child: const Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: colorWhite,
-                            size: 26,
+                  GetBuilder<LoginController>(builder: (loginController) {
+                    return SizedBox(
+                        width: double.infinity,
+                        child: Visibility(
+                          visible: loginController.isLoginProgress == false,
+                          replacement: const Center(
+                            child: CircularProgressIndicator(),
                           ),
-                        ),
-                      )),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              FocusScope.of(context).unfocus();
+                              if (!_formKey.currentState!.validate()) {
+                                return;
+                              }
+                              loginController
+                                  .userLogin(_emailTEController.text.trim(),
+                                      _passwordTEController.text)
+                                  .then((value) {
+                                if (value) {
+                                  Get.snackbar("Congrats!!", "Login success!",
+                                    backgroundColor: Colors.green,
+                                    colorText: Colors.white,);
+                                  Get.offAll(const TaskViewNavBarScreen());
+                                }else{
+                                  Get.snackbar("Sorry!!", "Login failed!",
+                                    backgroundColor: Colors.green,
+                                    colorText: Colors.white,);
+                                }
+                              });
+                            },
+                            child: const Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: colorWhite,
+                              size: 26,
+                            ),
+                          ),
+                        ));
+                  }),
                   const SizedBox(
                     height: 75,
                   ),

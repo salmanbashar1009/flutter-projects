@@ -6,7 +6,6 @@ import 'package:flutter_task_manager_app/data/services/network_caller.dart';
 import 'package:flutter_task_manager_app/data/utils/urls.dart';
 import 'package:flutter_task_manager_app/ui/widgets/count_summery.dart';
 import 'package:flutter_task_manager_app/ui/widgets/task_list_tile.dart';
-import 'package:flutter_task_manager_app/ui/widgets/update_task_status_dialogue_sheet.dart';
 
 class NewTaskScreen extends StatefulWidget {
   const NewTaskScreen({super.key});

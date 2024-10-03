@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task_manager_app/data/models/task_list_model.dart';
-import 'package:flutter_task_manager_app/ui/widgets/update_task_status_dialogue_sheet.dart';
 
 class TaskListTile extends StatelessWidget {
   final VoidCallback onDeleteTap, onEditTap;
@@ -47,7 +46,6 @@ class TaskListTile extends StatelessWidget {
             children: [
               InkWell(
                 onTap: (){
-                  UpdateTaskStatusDialogueSheet(task: data);
                 },
                 child: Chip(
                   label:  Text(

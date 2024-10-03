@@ -1,7 +1,7 @@
 class Urls {
   Urls._();
 
-  static const String _baseUrl = "https://task.teamrabbil.com/api/v1";
+  static const String _baseUrl = "http://152.42.163.176:2006/api/v1";
   static String registration = '$_baseUrl/registration';
   static String login = '$_baseUrl/login';
   static String profileUpdate = '$_baseUrl/profileUpdate';

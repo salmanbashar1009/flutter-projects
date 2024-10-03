@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task_manager_app/styles/styles.dart';
 import 'package:flutter_task_manager_app/ui/screens/splash_screen.dart';
+import 'package:flutter_task_manager_app/ui/state_managers/login_controller.dart';
+import 'package:flutter_task_manager_app/ui/state_managers/signup_controller.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 class TaskManagerApp extends StatefulWidget {
@@ -86,7 +89,16 @@ class _TaskManagerAppState extends State<TaskManagerApp> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8))))),
       themeMode: ThemeMode.light,
+      initialBinding: ControllerBinding(),
       home:  const SplashScreen(),
     );
+  }
+}
+
+class ControllerBinding extends Bindings{
+  @override
+  void dependencies(){
+    Get.put(LoginController());
+    Get.put(SignupController());
   }
 }
