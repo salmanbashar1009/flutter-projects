@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_task_manager_app/data/models/network_response.dart';
-import 'package:flutter_task_manager_app/data/services/network_caller.dart';
-import 'package:flutter_task_manager_app/data/utils/urls.dart';
 import 'package:flutter_task_manager_app/styles/styles.dart';
+import 'package:flutter_task_manager_app/ui/screens/new_task_screen.dart';
+import 'package:flutter_task_manager_app/ui/screens/task_view_navbar_screen.dart';
+import 'package:flutter_task_manager_app/ui/state_managers/add_new_task_controller.dart';
 import 'package:flutter_task_manager_app/ui/widgets/screen_background.dart';
 import 'package:get/get.dart';
 
@@ -18,43 +18,7 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
   final TextEditingController _descriptionTEController =
       TextEditingController();
 
-  bool _addNewTaskProgress = false;
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  Future<void> addNewTask() async {
-    _addNewTaskProgress = true;
-    if (mounted) {
-      setState(() {});
-      Map<String, dynamic> requestBody = {
-        "title": _titleTEController.text.trim(),
-        "description": _descriptionTEController.text.trim(),
-        "status": "New"
-      };
-
-      final NetworkResponse response =
-          await NetworkCaller().postRequest(Urls.createTask, requestBody);
-      _addNewTaskProgress = false;
-      if (mounted) {
-        setState(() {});
-      }
-
-      if (response.isSuccess) {
-        _titleTEController.clear();
-        _descriptionTEController.clear();
-
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Task added successfully")));
-        }
-      } else {
-        if (mounted) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text("Failed! Try again")));
-        }
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,29 +57,60 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
                 const SizedBox(
                   height: 25,
                 ),
-                SizedBox(
-                    width: double.infinity,
-                    child: Visibility(
-                      visible: _addNewTaskProgress == false,
-                      replacement: const Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                      child: ElevatedButton(
-                          onPressed: () {
-                            FocusScope.of(context).unfocus();
-                            addNewTask();
-                          },
-                          child: Text(
-                            'Save',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                          )),
-                    )),
+                GetBuilder<AddNewTaskController>(
+                    builder: (addNewTaskController) {
+                  return SizedBox(
+                      width: double.infinity,
+                      child: Visibility(
+                        visible:
+                            addNewTaskController.addNewTaskProgress == false,
+                        replacement: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        child: ElevatedButton(
+                            onPressed: () {
+                              FocusScope.of(context).unfocus();
+                              if (!_formKey.currentState!.validate()) {
+                                return;
+                              }
+                              addNewTaskController
+                                  .addNewTask(_titleTEController.text.trim(),
+                                      _descriptionTEController.text.trim())
+                                  .then((value) {
+                                if (value) {
+                                  _titleTEController.clear();
+                                  _descriptionTEController.clear();
+                                  Get.offAll(const TaskViewNavBarScreen());
+                                  Get.snackbar(
+                                    "Congrats!",
+                                    "Task added successfully!",
+                                    backgroundColor: Colors.green,
+                                    colorText: Colors.white,
+                                    borderRadius: 10,
+                                  );
+                                }else{
+                                  Get.snackbar(
+                                    "Failed!",
+                                    "Task is not added!",
+                                    backgroundColor: Colors.green,
+                                    colorText: Colors.white,
+                                    borderRadius: 10,
+                                  );
+                                }
+                              });
+                            },
+                            child: Text(
+                              'Save',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                            )),
+                      ));
+                }),
               ],
             ),
           ),

@@ -3,6 +3,7 @@ import 'package:flutter_task_manager_app/data/models/network_response.dart';
 import 'package:flutter_task_manager_app/data/models/task_list_model.dart';
 import 'package:flutter_task_manager_app/data/services/network_caller.dart';
 import 'package:flutter_task_manager_app/data/utils/urls.dart';
+import 'package:flutter_task_manager_app/ui/widgets/screen_background.dart';
 import 'package:flutter_task_manager_app/ui/widgets/task_list_tile.dart';
 
 class CancelledTaskScreen extends StatefulWidget {
@@ -46,33 +47,31 @@ class _CancelledTaskScreenState extends State<CancelledTaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: RefreshIndicator(
-                  onRefresh: () async{
-        getCancelledTask();
-                  },
-                  child: _getCancelledTaskProgress
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : ListView.separated(
-              itemCount: _taskListModel.data!.length, // Set the item count
-              itemBuilder: (context, index) {
-                return TaskListTile(
-                  onDeleteTap: () {},
-                  onEditTap: () {},
-                  data: _taskListModel.data![index],
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return const Divider(
-                  height: 5,
-                  color: Colors.black12,
-                );
-              },
-            ),
-                ),
-      ),
+      body: ScreenBackground(child: RefreshIndicator(
+        onRefresh: () async{
+          getCancelledTask();
+        },
+        child: _getCancelledTaskProgress
+            ? const Center(
+          child: CircularProgressIndicator(),
+        )
+            : ListView.separated(
+          itemCount: _taskListModel.data!.length, // Set the item count
+          itemBuilder: (context, index) {
+            return TaskListTile(
+              onDeleteTap: () {},
+              onEditTap: () {},
+              data: _taskListModel.data![index],
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return const Divider(
+              height: 5,
+              color: Colors.black12,
+            );
+          },
+        ),
+      ),),
     );
   }
 }

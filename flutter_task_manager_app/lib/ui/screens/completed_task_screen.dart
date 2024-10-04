@@ -3,6 +3,7 @@ import 'package:flutter_task_manager_app/data/models/network_response.dart';
 import 'package:flutter_task_manager_app/data/models/task_list_model.dart';
 import 'package:flutter_task_manager_app/data/services/network_caller.dart';
 import 'package:flutter_task_manager_app/data/utils/urls.dart';
+import 'package:flutter_task_manager_app/ui/widgets/screen_background.dart';
 import 'package:flutter_task_manager_app/ui/widgets/task_list_tile.dart';
 
 class CompletedTaskScreen extends StatefulWidget {
@@ -46,7 +47,7 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: ScreenBackground(
           child: RefreshIndicator(
                   onRefresh: ()async {
                     getCompletedTask();
