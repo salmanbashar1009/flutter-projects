@@ -3,7 +3,7 @@ import 'package:flutter_task_manager_app/styles/styles.dart';
 import 'package:flutter_task_manager_app/ui/screens/splash_screen.dart';
 import 'package:flutter_task_manager_app/ui/state_managers/add_new_task_controller.dart';
 import 'package:flutter_task_manager_app/ui/state_managers/get_count_summary_controller.dart';
-import 'package:flutter_task_manager_app/ui/state_managers/get_new_task_controller.dart';
+import 'package:flutter_task_manager_app/ui/state_managers/get_tasks_controller.dart';
 import 'package:flutter_task_manager_app/ui/state_managers/login_controller.dart';
 import 'package:flutter_task_manager_app/ui/state_managers/signup_controller.dart';
 import 'package:get/get.dart';
@@ -104,7 +104,7 @@ class ControllerBinding extends Bindings{
     Get.put(LoginController());
     Get.put(SignupController());
     Get.put(AddNewTaskController());
-    Get.put(GetNewTaskController());
+    Get.put(GetTasksController());
     Get.put(GetCountSummaryController());
   }
 }

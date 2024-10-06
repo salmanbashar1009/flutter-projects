@@ -4,7 +4,7 @@ import 'package:flutter_task_manager_app/data/models/network_response.dart';
 import 'package:flutter_task_manager_app/data/services/network_caller.dart';
 import 'package:flutter_task_manager_app/data/utils/urls.dart';
 import 'package:flutter_task_manager_app/ui/state_managers/get_count_summary_controller.dart';
-import 'package:flutter_task_manager_app/ui/state_managers/get_new_task_controller.dart';
+import 'package:flutter_task_manager_app/ui/state_managers/get_tasks_controller.dart';
 import 'package:flutter_task_manager_app/ui/widgets/count_summery.dart';
 import 'package:flutter_task_manager_app/ui/widgets/screen_background.dart';
 import 'package:flutter_task_manager_app/ui/widgets/task_list_tile.dart';
@@ -22,7 +22,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
   final GetCountSummaryController _getCountSummaryController =
       Get.find<GetCountSummaryController>();
 
-  final GetNewTaskController _getNewTaskController = Get.find<GetNewTaskController>();
+  final GetTasksController _getNewTaskController = Get.find<GetTasksController>();
 
   @override
   void initState() {
@@ -40,7 +40,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
         }
       });
 
-      _getNewTaskController.getNewTask(Urls.newTasks).then((value) {
+      _getNewTaskController.getTasks(Urls.newTasks).then((value) {
         if (value) {
           Get.snackbar(
             'Welcome!',
@@ -124,7 +124,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                     );
                   }
                 });
-                _getNewTaskController.getNewTask(Urls.newTasks).then((value) {
+                _getNewTaskController.getTasks(Urls.newTasks).then((value) {
                   if (value == false) {
                     Get.snackbar(
                       'Sorry!',
@@ -136,9 +136,9 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                   }
                 });
               },
-              child: GetBuilder<GetNewTaskController>(
+              child: GetBuilder<GetTasksController>(
                   builder: (getNewTaskController) {
-                return getNewTaskController.getNewTaskProgress
+                return getNewTaskController.getTasksProgress
                     ? const Center(child: CircularProgressIndicator())
                     : ListView.separated(
                         itemCount:
