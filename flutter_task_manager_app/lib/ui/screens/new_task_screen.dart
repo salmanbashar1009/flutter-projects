@@ -22,7 +22,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
   final GetCountSummaryController _getCountSummaryController =
       Get.find<GetCountSummaryController>();
 
-  final GetTasksController _getNewTaskController = Get.find<GetTasksController>();
+  final GetTasksController _getTasksController = Get.find<GetTasksController>();
 
   @override
   void initState() {
@@ -40,7 +40,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
         }
       });
 
-      _getNewTaskController.getTasks(Urls.newTasks).then((value) {
+      _getTasksController.getTasks(Urls.newTasks).then((value) {
         if (value) {
           Get.snackbar(
             'Welcome!',
@@ -124,7 +124,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                     );
                   }
                 });
-                _getNewTaskController.getTasks(Urls.newTasks).then((value) {
+                _getTasksController.getTasks(Urls.newTasks).then((value) {
                   if (value == false) {
                     Get.snackbar(
                       'Sorry!',
