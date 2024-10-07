@@ -6,7 +6,6 @@ import 'package:flutter_task_manager_app/data/services/network_caller.dart';
 import 'package:flutter_task_manager_app/data/utils/urls.dart';
 import 'package:flutter_task_manager_app/styles/styles.dart';
 import 'package:flutter_task_manager_app/ui/screens/splash_screen.dart';
-import 'package:flutter_task_manager_app/ui/screens/task_view_navbar_screen.dart';
 import 'package:flutter_task_manager_app/ui/widgets/screen_background.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -46,10 +45,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _emailTEController.text = userData.email ?? " ";
+    _emailTEController.text = userData.email!;
     _firstNameTEController.text = userData.firstName ?? " ";
     _lastNameTEController.text = userData.lastName ?? " ";
-    _mobileTEController.text = userData.mobile ?? " ";
     _mobileTEController.text = userData.mobile ?? " ";
   }
 
@@ -63,7 +61,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       "firstName": _firstNameTEController.text.trim(),
       "lastName": _lastNameTEController.text.trim(),
       "mobile": _mobileTEController.text.trim(),
-      "photo": " "
+      "photo": imageFile
     };
 
     if (_passwordTEController.text.isNotEmpty) {

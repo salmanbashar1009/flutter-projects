@@ -40,15 +40,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
       });
 
       _getTasksController.getTasks(Urls.newTasks).then((value) {
-        if (value) {
-          Get.snackbar(
-            'Welcome!',
-            'Manage tasks smartly',
-            backgroundColor: Colors.green,
-            colorText: Colors.white,
-            borderRadius: 10,
-          );
-        } else {
+        if (value == false) {
           Get.snackbar(
             'Sorry!',
             'Error occurred!',

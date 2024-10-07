@@ -56,11 +56,21 @@ class _TaskViewNavBarScreenState extends State<TaskViewNavBarScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "${AuthUtility.userInfo.data?.firstName ?? ' '} ${AuthUtility.userInfo.data?.lastName ?? ' '}",
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                color: colorWhite
-              ),
+            Row(
+              children: [
+                Text(
+                  AuthUtility.userInfo.data?.firstName ?? " ",
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: colorWhite
+                  ),
+                ),
+                Text(
+                  AuthUtility.userInfo.data?.lastName ?? " ",
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: colorWhite
+                  ),
+                ),
+              ],
             ),
             Text(AuthUtility.userInfo.data?.email ?? "unknown",
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(

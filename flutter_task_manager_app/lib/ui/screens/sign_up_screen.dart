@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_task_manager_app/data/models/network_response.dart';
-import 'package:flutter_task_manager_app/data/services/network_caller.dart';
-import 'package:flutter_task_manager_app/data/utils/urls.dart';
 import 'package:flutter_task_manager_app/styles/styles.dart';
 import 'package:flutter_task_manager_app/ui/screens/login_screen.dart';
 import 'package:flutter_task_manager_app/ui/state_managers/signup_controller.dart';
@@ -65,7 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 15,
                   ),
                   TextFormField(
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.name,
                     controller: _firstNameTEController,
                     decoration: appInputDecoration('First Name'),
                     validator: (String? value) {
@@ -79,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 15,
                   ),
                   TextFormField(
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.name,
                     controller: _lastNameTEController,
                     decoration: appInputDecoration('Last Name'),
                     validator: (String? value) {
