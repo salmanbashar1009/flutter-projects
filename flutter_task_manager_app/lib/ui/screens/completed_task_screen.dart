@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_task_manager_app/data/models/network_response.dart';
-import 'package:flutter_task_manager_app/data/models/task_list_model.dart';
-import 'package:flutter_task_manager_app/data/services/network_caller.dart';
 import 'package:flutter_task_manager_app/data/utils/urls.dart';
+import 'package:flutter_task_manager_app/ui/state_managers/get_tasks_controller.dart';
 import 'package:flutter_task_manager_app/ui/widgets/screen_background.dart';
 import 'package:flutter_task_manager_app/ui/widgets/task_list_tile.dart';
+import 'package:get/get.dart';
 
 class CompletedTaskScreen extends StatefulWidget {
   const CompletedTaskScreen({super.key});
@@ -14,35 +13,46 @@ class CompletedTaskScreen extends StatefulWidget {
 }
 
 class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
-  bool _getCompletedTaskProgress = false;
-  TaskListModel _taskListModel = TaskListModel();
+  // bool _getCompletedTaskProgress = false;
+  // TaskListModel _taskListModel = TaskListModel();
+
+  final GetTasksController _getTasksController = Get.find<GetTasksController>();
 
   @override
   void initState() {
-    getCompletedTask();
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _getTasksController.getTasks(Urls.completedTasks).then((value) {
+        if (value == false) {
+          Get.snackbar("Sorry!", "Error occurred!",
+              backgroundColor: Colors.red,
+              borderRadius: 10,
+              colorText: Colors.white);
+        }
+      });
+    });
   }
 
-  Future<void> getCompletedTask() async {
-    _getCompletedTaskProgress = true;
-    if (mounted) {
-      setState(() {});
-    }
-    NetworkResponse response =
-        await NetworkCaller().getRequest(Urls.completedTasks);
-    if (response.isSuccess) {
-      _taskListModel = TaskListModel.fromJson(response.body!);
-    } else {
-      if (mounted) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("Failed! Try again")));
-      }
-    }
-    _getCompletedTaskProgress = false;
-    if (mounted) {
-      setState(() {});
-    }
-  }
+  // Future<void> getCompletedTask() async {
+  //   _getCompletedTaskProgress = true;
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  //   NetworkResponse response =
+  //       await NetworkCaller().getRequest(Urls.completedTasks);
+  //   if (response.isSuccess) {
+  //     _taskListModel = TaskListModel.fromJson(response.body!);
+  //   } else {
+  //     if (mounted) {
+  //       ScaffoldMessenger.of(context)
+  //           .showSnackBar(const SnackBar(content: Text("Failed! Try again")));
+  //     }
+  //   }
+  //   _getCompletedTaskProgress = false;
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -50,29 +60,42 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
       body: ScreenBackground(
           child: RefreshIndicator(
                   onRefresh: ()async {
-                    getCompletedTask();
+                    _getTasksController.getTasks(Urls.completedTasks).then((value) {
+                      if (value == false) {
+                        Get.snackbar("Sorry!", "Error occurred!",
+                            backgroundColor: Colors.red,
+                            borderRadius: 10,
+                            colorText: Colors.white);
+                      }
+                    });
                   },
-                  child: _getCompletedTaskProgress
-                      ? const Center(
-            child: CircularProgressIndicator(),
-          )
-                      : ListView.separated(
-            itemCount:
-                _taskListModel.data!.length, // Set the item count
-            itemBuilder: (context, index) {
-              return TaskListTile(
-                onDeleteTap: () {},
-                onEditTap: () {},
-                data: _taskListModel.data![index],
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return const Divider(
-                height: 5,
-                color: Colors.black12,
-              );
-            },
-          ),
+                  child: GetBuilder<GetTasksController>(builder: (getTasksController){
+                    return getTasksController.getTasksProgress
+                        ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                        : ListView.separated(
+                      itemCount: getTasksController.taskListModel.data?.length ?? 0, // Set the item count
+                      itemBuilder: (context, index) {
+                        if (getTasksController.taskListModel.data == null ||
+                            getTasksController.taskListModel.data!.isEmpty) {
+                          return const Center(
+                              child: Text('No data available'));
+                        }
+                        return TaskListTile(
+                          onDeleteTap: () {},
+                          onEditTap: () {},
+                          data: getTasksController.taskListModel.data![index],
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const Divider(
+                          height: 5,
+                          color: Colors.black12,
+                        );
+                      },
+                    );
+                  }),
                 )),
     );
   }
