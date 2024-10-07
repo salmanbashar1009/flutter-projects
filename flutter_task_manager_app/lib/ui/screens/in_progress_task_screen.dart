@@ -79,9 +79,12 @@ class _InprogressTaskScreenState extends State<InprogressTaskScreen> {
           return getTasksController.getTasksProgress
               ? const Center(child: CircularProgressIndicator())
               : ListView.separated(
-                  itemCount: getTasksController.taskListModel.data?.length ?? 0,
+                  itemCount: getTasksController.taskListModel.data?.length ?? 2,
                   // Set the item count
                   itemBuilder: (context, index) {
+                    if (getTasksController.taskListModel.data == null || getTasksController.taskListModel.data!.isEmpty) {
+                      return const Center(child: Text('No data available'));
+                    }
                     return TaskListTile(
                       onDeleteTap: () {},
                       onEditTap: () {},

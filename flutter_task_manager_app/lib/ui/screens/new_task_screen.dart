@@ -18,7 +18,6 @@ class NewTaskScreen extends StatefulWidget {
 }
 
 class _NewTaskScreenState extends State<NewTaskScreen> {
-
   final GetCountSummaryController _getCountSummaryController =
       Get.find<GetCountSummaryController>();
 
@@ -74,36 +73,41 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
             height: 15,
           ),
           SizedBox(
-            height: 50,
-            width: double.infinity,
-            child: GetBuilder<GetCountSummaryController>(builder: (getCountSummaryController){
-              return getCountSummaryController.getCountSummeryProgress
-                  ? const Center(
-                child: SizedBox(
-                  width: 150,
-                  child: LinearProgressIndicator(
-                    color: Colors.green,
-                    backgroundColor: Colors.white,
-                  ),
-                ),
-              )
-                  : ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: getCountSummaryController.countSummaryModel.data?.length ?? 0,
-                itemBuilder: (context, index) {
-                  return CountSummery(
-                      number: getCountSummaryController.countSummaryModel.data![index].sum ?? 0,
-                      title:
-                      getCountSummaryController.countSummaryModel.data![index].sId ?? "Error!");
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return const Divider(
-                    height: 5,
-                  );
-                },
-              ) ;
-            })
-          ),
+              height: 50,
+              width: double.infinity,
+              child: GetBuilder<GetCountSummaryController>(
+                  builder: (getCountSummaryController) {
+                return getCountSummaryController.getCountSummeryProgress
+                    ? const Center(
+                        child: SizedBox(
+                          width: 150,
+                          child: LinearProgressIndicator(
+                            color: Colors.green,
+                            backgroundColor: Colors.white,
+                          ),
+                        ),
+                      )
+                    : ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: getCountSummaryController
+                                .countSummaryModel.data?.length ??
+                            0,
+                        itemBuilder: (context, index) {
+                          return CountSummery(
+                              number: getCountSummaryController
+                                      .countSummaryModel.data![index].sum ??
+                                  0,
+                              title: getCountSummaryController
+                                      .countSummaryModel.data![index].sId ??
+                                  "Error!");
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const Divider(
+                            height: 5,
+                          );
+                        },
+                      );
+              })),
           const SizedBox(
             height: 10,
           ),
@@ -136,21 +140,24 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                   }
                 });
               },
-              child: GetBuilder<GetTasksController>(
-                  builder: (getNewTaskController) {
-                return getNewTaskController.getTasksProgress
+              child:
+                  GetBuilder<GetTasksController>(builder: (getTasksController) {
+                return getTasksController.getTasksProgress
                     ? const Center(child: CircularProgressIndicator())
                     : ListView.separated(
                         itemCount:
-                            getNewTaskController.taskListModel.data?.length ?? 0, // Set the item count
+                            getTasksController.taskListModel.data?.length ?? 0,
+                        // Set the item count
                         itemBuilder: (context, index) {
-                          if (getNewTaskController.taskListModel.data == null || getNewTaskController.taskListModel.data!.isEmpty) {
-                            return const Center(child: Text('No data available'));
+                          if (getTasksController.taskListModel.data == null ||
+                              getTasksController.taskListModel.data!.isEmpty) {
+                            return const Center(
+                                child: Text('No data available'));
                           }
                           return TaskListTile(
                             onEditTap: () {},
                             onDeleteTap: () {},
-                            data:getNewTaskController.taskListModel.data![index],
+                            data: getTasksController.taskListModel.data![index],
                           );
                         },
                         separatorBuilder: (BuildContext context, int index) {
