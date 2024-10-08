@@ -66,7 +66,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
             height: 15,
           ),
           SizedBox(
-              height: 50,
+              height: 70,
               width: double.infinity,
               child: GetBuilder<GetCountSummaryController>(
                   builder: (getCountSummaryController) {

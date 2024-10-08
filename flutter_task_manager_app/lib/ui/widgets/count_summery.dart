@@ -17,8 +17,10 @@ class CountSummery extends StatelessWidget {
       width: 120,
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal:5),
-        shape: const RoundedRectangleBorder(),
-        elevation: 4,
+        shape:  const RoundedRectangleBorder(),
+        shadowColor: Colors.grey,
+        surfaceTintColor: Colors.white70,
+        color: Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
