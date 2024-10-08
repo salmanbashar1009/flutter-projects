@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_task_manager_app/data/models/count_summery_model.dart';
-import 'package:flutter_task_manager_app/data/models/network_response.dart';
-import 'package:flutter_task_manager_app/data/services/network_caller.dart';
 import 'package:flutter_task_manager_app/data/utils/urls.dart';
+import 'package:flutter_task_manager_app/ui/state_managers/delete_task_controller.dart';
 import 'package:flutter_task_manager_app/ui/state_managers/get_count_summary_controller.dart';
 import 'package:flutter_task_manager_app/ui/state_managers/get_tasks_controller.dart';
 import 'package:flutter_task_manager_app/ui/widgets/count_summery.dart';
@@ -22,6 +20,9 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
       Get.find<GetCountSummaryController>();
 
   final GetTasksController _getTasksController = Get.find<GetTasksController>();
+
+  final DeleteTaskController _deleteTaskController =
+      Get.find<DeleteTaskController>();
 
   @override
   void initState() {
@@ -148,7 +149,9 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                           }
                           return TaskListTile(
                             onEditTap: () {},
-                            onDeleteTap: () {},
+                            onDeleteTap: () {
+                              deleteAlertDialogue(index);
+                            },
                             data: getTasksController.taskListModel.data![index],
                           );
                         },
@@ -164,6 +167,53 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
           ),
         ],
       )),
+    );
+  }
+
+  void deleteAlertDialogue(int index) {
+    Get.dialog(
+      AlertDialog(
+        title: const Text(
+          "Alert!",
+          style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+        ),
+        content: const Text("Do you want to delete this item?"),
+        actions: [
+          TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: const Text("No")),
+          TextButton(
+            onPressed: () {
+              Get.back();
+              _deleteTaskController
+                  .deleteTask(
+                      _getTasksController.taskListModel.data![index].sId!)
+                  .then((value) {
+                _getCountSummaryController.getCountSummary();
+                _getTasksController.getUpdateState();
+                if (value) {
+                  Get.snackbar(
+                    "Success",
+                    "Task is deleted",
+                    backgroundColor: Colors.green,
+                    colorText: Colors.white,
+                    borderRadius: 10,
+                  );
+                }else {
+                  Get.snackbar("Failed!", "Error occured!",
+                      backgroundColor: Colors.red,
+                      borderRadius: 10,
+                      colorText: Colors.white
+                );
+                }
+              });
+            },
+            child: const Text("Yes"),
+          )
+        ],
+      ),
     );
   }
 }

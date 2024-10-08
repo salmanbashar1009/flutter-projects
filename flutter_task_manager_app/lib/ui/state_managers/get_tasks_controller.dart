@@ -11,6 +11,10 @@ class GetTasksController extends GetxController {
 
   TaskListModel get taskListModel => _taskListModel;
 
+  void getUpdateState(){
+    update();
+  }
+
   Future<bool> getTasks(String url) async {
     _getTasksProgress = true;
     update();
