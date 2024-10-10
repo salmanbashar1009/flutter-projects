@@ -1,5 +1,5 @@
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/Auth/otp_verification_screen.dart';
-import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_path_holder.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -24,7 +24,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 const SizedBox(height: 80,),
                 Center(
                     child: SvgPicture.asset(
-                  ImagePathHolder.canvasLogoSVG,
+                  ImageAssets.canvasLogoSVG,
                   width: 100,
                 )),
                 const SizedBox(height: 16,),

@@ -12,38 +12,34 @@ class CraftyBay extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
       theme: ThemeData(
-        brightness: Brightness.light,
-        colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: MaterialColor(
-                ColorPalette.primarySwatch.value, ColorPalette.primaryColor)),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: primeColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(6)
-              ),
-              textStyle:  const TextStyle(
-                fontSize: 18,
-                letterSpacing: 0.8,
-                fontWeight: FontWeight.w600,
-              )
-            )),
-        inputDecorationTheme:   const InputDecorationTheme(
-            labelStyle: TextStyle(color: Colors.black54),
-            contentPadding: EdgeInsets.symmetric(horizontal: 8,vertical: 0),
-            border: OutlineInputBorder(
-                borderSide: BorderSide(color: primeColor),
-            borderRadius: BorderRadius.all(Radius.circular(6))),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: primeColor)),
-            disabledBorder:
-                 OutlineInputBorder(borderSide: BorderSide(color: primeColor))),
-        textTheme: TextTheme(
-          titleLarge: TextStyle(
-            color: Colors.black.withOpacity(0.7),
-            fontWeight: FontWeight.w600
-          )
-        )
-      ),
+          brightness: Brightness.light,
+          colorScheme: ColorScheme.fromSwatch(
+              primarySwatch: MaterialColor(
+                  ColorPalette.primarySwatch.value, ColorPalette.primaryColor)),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: primeColor,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6)),
+                  textStyle: const TextStyle(
+                    fontSize: 18,
+                    letterSpacing: 0.8,
+                    fontWeight: FontWeight.w600,
+                  ))),
+          inputDecorationTheme: const InputDecorationTheme(
+              labelStyle: TextStyle(color: Colors.black54),
+              contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+              border: OutlineInputBorder(
+                  borderSide: BorderSide(color: primeColor),
+                  borderRadius: BorderRadius.all(Radius.circular(6))),
+              enabledBorder:
+                  OutlineInputBorder(borderSide: BorderSide(color: primeColor)),
+              disabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: primeColor))),
+          textTheme: TextTheme(
+              titleLarge: TextStyle(
+                  color: Colors.black.withOpacity(0.7),
+                  fontWeight: FontWeight.w600))),
     );
   }
 }

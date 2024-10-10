@@ -1,5 +1,6 @@
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/Auth/email_verification_screen.dart';
-import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_path_holder.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/home_screen.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -21,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void goToNextPage() {
     Future.delayed(const Duration(seconds: 2)).then((value) =>
-        Get.offAll(const EmailVerificationScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 300)));
+        Get.offAll(const HomeScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 300)));
   }
 
 
@@ -33,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
         children: [
           const Spacer(),
           Center(
-              child: SvgPicture.asset(ImagePathHolder.canvasLogoSVG,
+              child: SvgPicture.asset(ImageAssets.canvasLogoSVG,
                 width: 150,
               )),
           const Spacer(),
@@ -41,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
           const SizedBox(
             height: 20,
           ),
-          const Text(ImagePathHolder.versionCode),
+          const Text(ImageAssets.versionCode),
           const SizedBox(
             height: 20,
           ),

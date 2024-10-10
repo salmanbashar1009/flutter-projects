@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/Auth/complete_profile.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
-import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_path_holder.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_assets.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -65,7 +65,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                 ),
                 Center(
                     child: SvgPicture.asset(
-                  ImagePathHolder.canvasLogoSVG,
+                  ImageAssets.canvasLogoSVG,
                   width: 100,
                 )),
                 const SizedBox(

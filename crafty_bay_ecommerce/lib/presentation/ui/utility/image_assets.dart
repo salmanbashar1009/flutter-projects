@@ -1,7 +1,7 @@
 
 
 
-class ImagePathHolder{
+class ImageAssets{
   static const String canvasLogoSVG = "assets/images/canvas-logo.svg";
   static const String logoNav = "assets/images/logo_nav.svg";
 
