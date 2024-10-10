@@ -19,6 +19,7 @@ class _HomeSliderState extends State<HomeSlider> {
       children: [
         CarouselSlider(
           options: CarouselOptions(
+            viewportFraction: 1,
               height: 160.0,
               aspectRatio: 16/9,
               autoPlay: true,

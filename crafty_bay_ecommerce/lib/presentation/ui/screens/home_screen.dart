@@ -1,8 +1,8 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_assets.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/circular_icon_button.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/home/home_slider.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/widgets/home/section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -62,7 +62,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(height: 16,),
-              const HomeSlider()
+              const HomeSlider(),
+              const SizedBox(height: 16,),
+                SectionTitle(onTap: (){},title: "All Categories",),
 
             ],
           ),
@@ -71,6 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+
 
 
 
