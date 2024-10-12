@@ -1,4 +1,5 @@
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -21,7 +22,7 @@ class ProductCard extends StatelessWidget {
           children: [
             Container(
               height: 100,
-              padding: EdgeInsets.all(8),
+              padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(8),
@@ -29,7 +30,8 @@ class ProductCard extends StatelessWidget {
                   ),
                   color: primeColor.withOpacity(0.1),
                   image: DecorationImage(
-                      image: NetworkImage("https://i.pinimg.com/736x/6a/b8/f7/6ab8f71806bd568e4d229658e7e979f6.jpg"),
+                    image: AssetImage(ImageAssets.shoePng),
+                      // image: NetworkImage("https://i.pinimg.com/736x/6a/b8/f7/6ab8f71806bd568e4d229658e7e979f6.jpg"),
                       fit: BoxFit.contain
                   )
 
