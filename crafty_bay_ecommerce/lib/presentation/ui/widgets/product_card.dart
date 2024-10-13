@@ -22,14 +22,14 @@ class ProductCard extends StatelessWidget {
           children: [
             Container(
               height: 100,
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(8),
                     topRight: Radius.circular(8),
                   ),
                   color: primeColor.withOpacity(0.1),
-                  image: DecorationImage(
+                  image: const DecorationImage(
                     image: AssetImage(ImageAssets.shoePng),
                       // image: NetworkImage("https://i.pinimg.com/736x/6a/b8/f7/6ab8f71806bd568e4d229658e7e979f6.jpg"),
                       fit: BoxFit.contain
@@ -41,7 +41,7 @@ class ProductCard extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  Text("New year special shoe",
+                  const Text("New year special shoe",
                     maxLines: 1,
                     style: TextStyle(
                         overflow: TextOverflow.ellipsis,
@@ -52,12 +52,12 @@ class ProductCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("\$90",style: TextStyle(
+                      const Text("\$90",style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
                         color: primeColor,
                       ),),
-                      Wrap(
+                      const Wrap(
                         children: [
                           Icon(Icons.star,size: 15,color: Colors.amber,),
                           Text("4.8",style: TextStyle(
@@ -71,8 +71,8 @@ class ProductCard extends StatelessWidget {
                       Card(
                         color: primeColor,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(3),
+                        child: const Padding(
+                          padding: EdgeInsets.all(3),
                           child: Icon(Icons.favorite_outline,size: 12,color: Colors.white,),
                         ),
                       )

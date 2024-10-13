@@ -14,7 +14,7 @@ class CatergoryCard extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.all(18),
-          margin: const EdgeInsets.symmetric(horizontal: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 8),
           decoration: BoxDecoration(
               color: primeColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(8)),
