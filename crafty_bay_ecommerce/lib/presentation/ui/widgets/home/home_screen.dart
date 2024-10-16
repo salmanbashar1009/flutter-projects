@@ -1,13 +1,15 @@
-import 'package:crafty_bay_ecommerce/presentation/ui/screens/catergory_screen.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/catergory_list_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/category_card.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/home/home_slider.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/home/section_title.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 
-class HomeBody extends StatelessWidget {
-  const HomeBody({
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({
     super.key,
   });
 
@@ -24,12 +26,11 @@ class HomeBody extends StatelessWidget {
                     Icons.search,
                     color: primeColor,
                   ),
-                  border:
-                  const OutlineInputBorder(borderSide: BorderSide.none),
+                  border: const OutlineInputBorder(borderSide: BorderSide.none),
                   focusedBorder:
-                  const OutlineInputBorder(borderSide: BorderSide.none),
+                      const OutlineInputBorder(borderSide: BorderSide.none),
                   enabledBorder:
-                  const OutlineInputBorder(borderSide: BorderSide.none),
+                      const OutlineInputBorder(borderSide: BorderSide.none),
                   fillColor: Colors.grey.shade200,
                   filled: true,
                   hintText: "Search",
@@ -44,7 +45,9 @@ class HomeBody extends StatelessWidget {
             ),
             SectionTitle(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const CategoryScreen()));
+                Get.to(const CategoryListScreen(),
+                    transition: Transition.rightToLeft,
+                    duration: const Duration(milliseconds: 300));
               },
               title: "All Categories",
             ),
@@ -63,39 +66,39 @@ class HomeBody extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            SectionTitle(title: "Popular", onTap: (){}),
+            SectionTitle(title: "Popular", onTap: () {}),
             SizedBox(
               height: 170,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 20,
-                  itemBuilder: (context,index){
+                  itemBuilder: (context, index) {
                     return const ProductCard();
                   }),
             ),
             const SizedBox(
               height: 10,
             ),
-            SectionTitle(title: "Special", onTap: (){}),
+            SectionTitle(title: "Special", onTap: () {}),
             SizedBox(
               height: 170,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 20,
-                  itemBuilder: (context,index){
+                  itemBuilder: (context, index) {
                     return const ProductCard();
                   }),
             ),
             const SizedBox(
               height: 10,
             ),
-            SectionTitle(title: "New", onTap: (){}),
+            SectionTitle(title: "New", onTap: () {}),
             SizedBox(
               height: 170,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 20,
-                  itemBuilder: (context,index){
+                  itemBuilder: (context, index) {
                     return const ProductCard();
                   }),
             ),

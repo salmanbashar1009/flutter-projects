@@ -1,8 +1,8 @@
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/category_card.dart';
 import 'package:flutter/material.dart';
 
-class CategoryScreen extends StatelessWidget {
-  const CategoryScreen({super.key});
+class CategoryListScreen extends StatelessWidget {
+  const CategoryListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +17,13 @@ class CategoryScreen extends StatelessWidget {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(10),
-          child: SizedBox(
-            child: GridView.builder(
-                itemCount: 16,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,mainAxisExtent: 120, ),
-                itemBuilder: (context,index){
-                  return const CatergoryCard();
-                }),
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: GridView.builder(
+              itemCount: 15,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,mainAxisSpacing: 16 ),
+              itemBuilder: (context,index){
+                return const FittedBox(child: CatergoryCard());
+              }),
         ));
   }
 }

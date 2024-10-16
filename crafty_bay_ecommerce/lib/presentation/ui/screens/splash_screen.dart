@@ -1,5 +1,5 @@
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/Auth/email_verification_screen.dart';
-import 'package:crafty_bay_ecommerce/presentation/ui/screens/home_screen.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/main_bottom_nav_bar_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void goToNextPage() {
     Future.delayed(const Duration(seconds: 2)).then((value) =>
-        Get.offAll(const HomeScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 300)));
+        Get.offAll(const MainBottomNavBarScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 300)));
   }
 
 

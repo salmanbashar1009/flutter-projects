@@ -1,18 +1,18 @@
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_assets.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/circular_icon_button.dart';
-import 'package:crafty_bay_ecommerce/presentation/ui/widgets/home/home_body.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/widgets/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class MainBottomNavBarScreen extends StatefulWidget {
+  const MainBottomNavBarScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<MainBottomNavBarScreen> createState() => _MainBottomNavBarScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
   late  int _selectedIndex = 0;
 
   void _onItemTapped(int index){
@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: const HomeBody(),
+      body: const HomeScreen(),
       bottomNavigationBar: Container(
         width: double.infinity,
         decoration: BoxDecoration(
