@@ -1,3 +1,5 @@
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/category_list_screen.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/wish_list_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_assets.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/circular_icon_button.dart';
@@ -13,18 +15,20 @@ class MainBottomNavBarScreen extends StatefulWidget {
 }
 
 class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
-  late  int _selectedIndex = 0;
+  int _selectedIndex = 0;
 
-  void _onItemTapped(int index){
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  final List<Widget> _screens = [
+    const HomeScreen(),
+    const CategoryListScreen(),
+    const HomeScreen(),
+    const WishListScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 1,
         backgroundColor: Colors.white,
         title: Row(
           children: [
@@ -44,44 +48,56 @@ class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
           ],
         ),
       ),
-      body: const HomeScreen(),
+      body: _screens[_selectedIndex],
       bottomNavigationBar: Container(
         width: double.infinity,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 3,
-                blurRadius: 7,
-                offset: const Offset(0, 3),
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 3,
+              blurRadius: 7,
+              offset: const Offset(0, 3),
             ),
           ],
         ),
         child: BottomNavigationBar(
-          items: const<BottomNavigationBarItem> [
-            BottomNavigationBarItem(icon: Icon(Icons.home_outlined,size: 30,),label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.grid_view_outlined,size: 30),label: "Categories"),
-            BottomNavigationBarItem(icon: Icon(Icons.shopping_basket_outlined,size: 30),label: "Cart"),
-            BottomNavigationBarItem(icon: Icon(Icons.card_giftcard_outlined,size: 30),label: "Wish"),
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home_outlined,
+                  size: 30,
+                ),
+                label: "Home"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.grid_view_outlined, size: 30),
+                label: "Categories"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_basket_outlined, size: 30),
+                label: "Cart"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.card_giftcard_outlined, size: 30),
+                label: "Wish"),
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: primeColor,
           unselectedItemColor: Colors.grey.withOpacity(0.7),
-          onTap: _onItemTapped,
-          unselectedLabelStyle: TextStyle(color: Colors.grey.withOpacity(0.7,),fontWeight: FontWeight.w600),
+          onTap: (int index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          unselectedLabelStyle: TextStyle(
+              color: Colors.grey.withOpacity(
+                0.7,
+              ),
+              fontWeight: FontWeight.w600),
           showSelectedLabels: true,
           showUnselectedLabels: true,
           type: BottomNavigationBarType.fixed,
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w700),
-
         ),
       ),
     );
   }
 }
-
-
-
-
-
-

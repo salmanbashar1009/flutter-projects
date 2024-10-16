@@ -1,4 +1,7 @@
-import 'package:crafty_bay_ecommerce/presentation/ui/screens/catergory_list_screen.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/category_list_screen.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/new_product_list_screen.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/popular_product_list_screen.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/special_product_list_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/category_card.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/home/home_slider.dart';
@@ -6,7 +9,6 @@ import 'package:crafty_bay_ecommerce/presentation/ui/widgets/home/section_title.
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -66,7 +68,13 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            SectionTitle(title: "Popular", onTap: () {}),
+            SectionTitle(
+                title: "Popular",
+                onTap: () {
+                  Get.to(const PorpularProductListScreen(),
+                      transition: Transition.rightToLeft,
+                      duration: const Duration(milliseconds: 300));
+                }),
             SizedBox(
               height: 170,
               child: ListView.builder(
@@ -79,7 +87,11 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            SectionTitle(title: "Special", onTap: () {}),
+            SectionTitle(title: "Special", onTap: () {
+              Get.to(const SpecialroductListScreen(),
+                  transition: Transition.rightToLeft,
+                  duration: const Duration(milliseconds: 300));
+            }),
             SizedBox(
               height: 170,
               child: ListView.builder(
@@ -92,7 +104,9 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            SectionTitle(title: "New", onTap: () {}),
+            SectionTitle(title: "New", onTap: () {
+              Get.to(const NewProductListScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 300));
+            }),
             SizedBox(
               height: 170,
               child: ListView.builder(
