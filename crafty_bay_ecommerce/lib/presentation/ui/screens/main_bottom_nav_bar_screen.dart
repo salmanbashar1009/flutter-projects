@@ -24,6 +24,12 @@ class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
     const WishListScreen(),
   ];
 
+  void onItemTapped(int index){
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,11 +88,7 @@ class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
           currentIndex: _selectedIndex,
           selectedItemColor: primeColor,
           unselectedItemColor: Colors.grey.withOpacity(0.7),
-          onTap: (int index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
+          onTap: onItemTapped,
           unselectedLabelStyle: TextStyle(
               color: Colors.grey.withOpacity(
                 0.7,
