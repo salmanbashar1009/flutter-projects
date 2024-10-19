@@ -1,5 +1,7 @@
+import 'package:crafty_bay_ecommerce/presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class WishListScreen extends StatefulWidget {
   const WishListScreen({super.key});
@@ -12,25 +14,33 @@ class _WishListScreenState extends State<WishListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title:  Text("Wish List",style: TextStyle(
-            color: Colors.black.withOpacity(0.7),
-            fontWeight: FontWeight.w700)),
-      ),
-      body:Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            crossAxisSpacing: 4,
-            mainAxisSpacing: 16,
+        appBar: AppBar(
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 12.0),
+            child: IconButton(
+                onPressed: () {
+                  Get.find<MainBottomNavBarController>().backToHome();
+                },
+                icon: const Icon(Icons.arrow_back_ios_new)),
           ),
-          itemCount: 10,
-          itemBuilder: (context,index){
-            return const FittedBox(child: ProductCard());
-          },
+          title: Text("Wish List",
+              style: TextStyle(
+                  color: Colors.black.withOpacity(0.7),
+                  fontWeight: FontWeight.w700)),
         ),
-      )
-    );
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 4,
+              mainAxisSpacing: 16,
+            ),
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return const FittedBox(child: ProductCard());
+            },
+          ),
+        ));
   }
 }

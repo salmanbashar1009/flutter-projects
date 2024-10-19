@@ -3,6 +3,8 @@ import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart'
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
+import 'state_holder_binder.dart';
+
 class CraftyBay extends StatelessWidget {
   const CraftyBay({super.key});
 
@@ -11,6 +13,7 @@ class CraftyBay extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
+      initialBinding: StateHolderBinder(),
       theme: ThemeData(
           brightness: Brightness.light,
           colorScheme: ColorScheme.fromSwatch(
