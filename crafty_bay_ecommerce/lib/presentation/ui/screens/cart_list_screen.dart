@@ -1,5 +1,4 @@
 import 'package:crafty_bay_ecommerce/presentation/state_holders/main_bottom_nav_bar_controller.dart';
-import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/add_cart_item_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,7 +32,7 @@ class _CartListScreenState extends State<CartListScreen> {
                 fontWeight: FontWeight.w700)),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
         child: ListView.builder(
           itemCount: 7,
           itemBuilder: (context, index) {
@@ -42,39 +41,70 @@ class _CartListScreenState extends State<CartListScreen> {
               child: Card(
                 shadowColor: Colors.grey.withOpacity(0.3),
                 shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.grey.shade200),
-                  borderRadius: BorderRadius.circular(5)
-                ),
+                    side: BorderSide(color: Colors.grey.shade200),
+                    borderRadius: BorderRadius.circular(5)),
                 elevation: 3,
-
                 child: ListTile(
                   title: Row(
                     children: [
-                      const Text("New year special shoe"),
+                      Text(
+                        "New year special shoe",
+                        style: TextStyle(
+                            color: Colors.black.withOpacity(0.65),
+                            fontWeight: FontWeight.w700,
+                        fontSize: 16),
+                      ),
                       const Spacer(),
                       IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.delete_forever,size: 30,color: Colors.grey,))
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.delete_forever,
+                            size: 30,
+                            color: Colors.grey,
+                          ))
                     ],
                   ),
-                  subtitle: const Column(
+                  subtitle: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Color: Red" "," " Size: X"),
-                      SizedBox(
+                      Text(
+                        "Color: Red" "," " Size: X",
+                        style: TextStyle(
+                            color: Colors.black.withOpacity(
+                              0.5,
+                            ),
+                            fontWeight: FontWeight.w400,
+                        fontSize: 13),
+                      ),
+                      const SizedBox(
                         height: 35,
                       ),
                       Padding(
-                        padding: EdgeInsets.only(right: 8.0),
+                        padding: const EdgeInsets.only(right: 8.0),
                         child: Row(
                           children: [
-                            Text("\$100"),
-                            Spacer(),
-                            AddCartItemButton(icon: Icons.remove,),
-                            SizedBox(width: 5,),
-                            Text("03"),
-                            SizedBox(width: 5,),
-                            AddCartItemButton(icon: Icons.add,),
+                            const Text("\$100",style: TextStyle(
+                                color: Colors.cyan,
+                                fontWeight: FontWeight.w700,
+                            fontSize: 16),),
+                            const Spacer(),
+                            const AddCartItemButton(
+                              icon: Icons.remove,
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Text("03",style: TextStyle(
+                                color: Colors.black.withOpacity(0.65),
+                                fontWeight: FontWeight.w700,
+                            fontSize: 16),),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            const AddCartItemButton(
+                              icon: Icons.add,
+                            ),
                           ],
                         ),
                       )
@@ -89,5 +119,3 @@ class _CartListScreenState extends State<CartListScreen> {
     );
   }
 }
-
-
