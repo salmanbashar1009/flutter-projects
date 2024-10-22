@@ -1,4 +1,5 @@
 import 'package:crafty_bay_ecommerce/presentation/state_holders/main_bottom_nav_bar_controller.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/cart_list_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/category_list_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/wish_list_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
@@ -22,7 +23,7 @@ class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const CategoryListScreen(),
-    const HomeScreen(),
+    const CartListScreen(),
     const WishListScreen(),
   ];
 
