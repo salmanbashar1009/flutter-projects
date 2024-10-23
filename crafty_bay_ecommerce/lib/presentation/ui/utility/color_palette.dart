@@ -16,19 +16,5 @@ class ColorPalette {
     900: Color.fromRGBO(66,190,195, 0.9),
 
   };
-  static const Map<int, Color> primaryColor = {
-    50: Color.fromRGBO(255,255,255, 1),
-    100: Color.fromRGBO(255,255,255, 1),
-    200: Color.fromRGBO(255,255,255, 1),
-    300: Color.fromRGBO(255,255,255, 1),
-    400: Color.fromRGBO(255,255,255,1),
-    500: Color.fromRGBO(255,255,255,1),
-    600: Color.fromRGBO(255,255,255, 1),
-    700: Color.fromRGBO(255,255,255,0.7),
-    800: Color.fromRGBO(255,255,255, 0.8),
-    900: Color.fromRGBO(255,255,255, 0.9),
-
-  };
-
   static Color primarySwatch = const Color.fromRGBO(66,190,195, 1);
 }

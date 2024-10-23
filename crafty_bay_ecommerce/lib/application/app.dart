@@ -15,10 +15,11 @@ class CraftyBay extends StatelessWidget {
       home: const SplashScreen(),
       initialBinding: StateHolderBinder(),
       theme: ThemeData(
+        primaryColor: ColorPalette.primarySwatch,
         brightness: Brightness.light,
         colorScheme: ColorScheme.fromSwatch(
             primarySwatch: MaterialColor(
-                ColorPalette.primarySwatch.value, ColorPalette.primaryColor)),
+                ColorPalette.primarySwatch.value, ColorPalette.color,),),
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
                 backgroundColor: primeColor,
