@@ -1,3 +1,4 @@
+import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/custom_stepper.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/home/product_details_slider.dart';
 import 'package:flutter/material.dart';
@@ -46,13 +47,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               children: [
                 Row(
                   children: [
-                    Text("Happy New Year Special Deal Save 30%",
+                    Expanded(
+                      flex: 7,
+                      child: Text(
+                        "Happy New Year Special Deal Save 30%",
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
                             color: Colors.black.withOpacity(0.7),
-                            fontWeight: FontWeight.w700,),),
+                            fontWeight: FontWeight.w700,),
+                      ),
+                    ),
 
                     Expanded(
+                      flex: 3,
                       child: CustomStepper(
                           lowerLimit: 1,
                           upperLimit: 10,
@@ -61,6 +68,33 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           onChange: (newValue) {
                             quantity = newValue;
                           }),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Wrap(
+                      alignment: WrapAlignment.center,
+                      children: [
+                        Icon(Icons.star,size: 20,color: Colors.amber,),
+                        Text("4.8",style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.blueGrey,
+                        ),),
+
+                      ],
+                    ),
+                    TextButton(onPressed: (){}, child: const Text("Review",style: TextStyle(
+                      fontSize: 16,fontWeight: FontWeight.w500
+                    ),)),
+                    Card(
+                      color: primeColor,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                      child: const Padding(
+                        padding: EdgeInsets.all(5),
+                        child: Icon(Icons.favorite_outline,size: 16,color: Colors.white,),
+                      ),
                     )
                   ],
                 )

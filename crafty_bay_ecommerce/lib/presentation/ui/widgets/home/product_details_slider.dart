@@ -19,7 +19,7 @@ class _ProductDetailsSliderState extends State<ProductDetailsSlider> {
         CarouselSlider(
           options: CarouselOptions(
               viewportFraction: 1,
-              height: 325,
+              height: 300,
               aspectRatio: 16 / 9,
               autoPlay: false,
               onPageChanged: (int page, _) {
@@ -35,10 +35,10 @@ class _ProductDetailsSliderState extends State<ProductDetailsSlider> {
                     ),
                     alignment: Alignment.center,
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 70),
+                      padding: const EdgeInsets.only(top: 20),
                       child: SizedBox(
-                          height: 180,
-                          width: 180,
+                          height: 200,
+                          width: 200,
                           child: Image.asset(
                             "assets/images/shoe.png",
                             fit: BoxFit.cover,
