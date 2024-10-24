@@ -1,16 +1,20 @@
 import 'package:crafty_bay_ecommerce/presentation/state_holders/main_bottom_nav_bar_controller.dart';
-import 'package:crafty_bay_ecommerce/presentation/ui/widgets/add_cart_item_button.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/widgets/custom_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CartListScreen extends StatefulWidget {
   const CartListScreen({super.key});
 
+
   @override
   State<CartListScreen> createState() => _CartListScreenState();
 }
 
 class _CartListScreenState extends State<CartListScreen> {
+  int quantity = 1;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,24 +91,11 @@ class _CartListScreenState extends State<CartListScreen> {
                             const Text("\$100",style: TextStyle(
                                 color: Colors.cyan,
                                 fontWeight: FontWeight.w700,
-                            fontSize: 16),),
+                            fontSize: 20),),
                             const Spacer(),
-                            const AddCartItemButton(
-                              icon: Icons.remove,
-                            ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            Text("03",style: TextStyle(
-                                color: Colors.black.withOpacity(0.65),
-                                fontWeight: FontWeight.w700,
-                            fontSize: 16),),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            const AddCartItemButton(
-                              icon: Icons.add,
-                            ),
+                             CustomStepper(lowerLimit: 1, upperLimit: 10, stepValue: 1, value: 1, onChange: (newValue) {
+                              quantity = newValue;
+                            })
                           ],
                         ),
                       )
