@@ -2,8 +2,7 @@
 
 A new Flutter project.
 
-![](C:/Users/User/Downloads/crafty-bay.png)
-
+crafty-bay.png
 
 ## Getting Started
 
