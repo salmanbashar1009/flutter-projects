@@ -2,8 +2,7 @@
 
 A new Flutter project.
 
-crafty-bay.png
-
+![](assets/images/crafty-bay.png)
 ## Getting Started
 
 This project is a starting point for a Flutter application.
