@@ -1,3 +1,4 @@
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/review_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/style.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/custom_stepper.dart';
@@ -117,7 +118,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           ],
                         ),
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.to(const ReviewScreen(), transition: Transition.rightToLeft);
+                            },
                             child: const Text(
                               "Review",
                               style: TextStyle(
@@ -253,8 +256,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             ),
           ),
           Container(
-            height: 130,
-            padding: EdgeInsets.all(32),
+            height: 100,
+            padding: EdgeInsets.symmetric(horizontal: 24),
             decoration: BoxDecoration(
               color: primeColor.withOpacity(0.15),
               borderRadius: const BorderRadius.only(

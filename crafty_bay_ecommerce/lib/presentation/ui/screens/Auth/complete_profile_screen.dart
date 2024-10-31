@@ -1,3 +1,4 @@
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/Auth/email_verification_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/Auth/otp_verification_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +81,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: (){
-                      Get.to(const OTPVerificationScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 300));
+                      Get.to(const EmailVerificationScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 300));
                     },
                     child: const Text("Next",style: TextStyle(color: Colors.white),),
                   ),

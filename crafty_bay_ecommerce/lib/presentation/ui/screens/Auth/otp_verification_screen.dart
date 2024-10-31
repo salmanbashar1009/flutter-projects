@@ -1,6 +1,8 @@
 import 'dart:async';
 
-import 'package:crafty_bay_ecommerce/presentation/ui/screens/Auth/complete_profile.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/Auth/complete_profile_screen.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/home_screen.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/main_bottom_nav_bar_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_assets.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/style.dart';
@@ -31,7 +33,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
     const oneSec = Duration(seconds: 1);
     _timer = Timer.periodic(
       oneSec,
-          (Timer timer) {
+      (Timer timer) {
         if (_start == 0) {
           setState(() {
             timer.cancel();
@@ -95,13 +97,13 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                   pinTheme: appOTPStyle(),
                   animationDuration: const Duration(milliseconds: 300),
                   enableActiveFill: true,
-                  onCompleted: (v) {
-                  },
+                  onCompleted: (v) {},
                   beforeTextPaste: (text) {
                     //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
                     //but you can show anything you want here, like your pop up saying wrong paste format or etc
                     return true;
-                  }, appContext: context,
+                  },
+                  appContext: context,
                 ),
                 const SizedBox(
                   height: 25,
@@ -110,7 +112,9 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Get.offAll(const CompleteProfileScreen(),transition: Transition.rightToLeft);
+                      Get.offAll(const MainBottomNavBarScreen(),
+                          transition: Transition.rightToLeft,
+                          duration: const Duration(milliseconds: 300));
                     },
                     child: Text(
                       "Next",
@@ -125,16 +129,20 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                   height: 20,
                 ),
                 RichText(
-                  text:  TextSpan(
+                  text: TextSpan(
                       style: const TextStyle(color: Colors.grey),
                       children: [
-                        const TextSpan(text: 'This code validity will expire in'),
+                        const TextSpan(
+                            text: 'This code validity will expire in'),
                         TextSpan(
-                            text: " $_start s", style: const TextStyle(color: primeColor)),
+                            text: " $_start s",
+                            style: const TextStyle(color: primeColor)),
                       ]),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                   child: const Text(
                     "Resend Code",
                     style: TextStyle(color: Colors.grey),
