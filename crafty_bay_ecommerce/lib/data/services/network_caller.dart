@@ -1,47 +1,40 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:crafty_bay_ecommerce/data/model/network_response.dart';
 import 'package:http/http.dart';
 
 class NetworkCaller {
-  Future<NetworkResponse> getRequest(String url,
-      {Map<String, String>? headers}) async {
+
+  ///get request method
+  static Future<NetworkResponse> getRequest(String url) async {
     try {
-      Response response = await get(Uri.parse(url));
-      log(response.statusCode.toString());
-      log(response.body);
-      _handleResponse(response);
+      final Response response = await get(Uri.parse(url));
+      return _handleResponse(response);
     } catch (e) {
       throw NetworkException('Network Error: $e');
     }
-    return NetworkResponse(false, -1, null);
   }
 
-  Future<NetworkResponse> postRequest(String url, Map<String, dynamic> body,
-      {Map<String, String>? headers}) async {
+  ///post request method
+  static Future<NetworkResponse> postRequest(String url, Map<String, dynamic> body) async {
     try {
-      Response response =
-          await post(Uri.parse(url), body: jsonEncode(body), headers: headers);
-      log(response.statusCode.toString());
-      log(response.body);
-
-      _handleResponse(response);
+      final response = await post(Uri.parse(url), body: jsonEncode(body));
+      return _handleResponse(response);
     } catch (e) {
       throw NetworkException('Network Error: $e');
     }
-    return NetworkResponse(false, -1, null);
   }
-
-  dynamic _handleResponse(Response response) {
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else if (response.statusCode == 401) {
-      throw UnauthorizedException('Unauthorized');
-    } else if (response.statusCode == 404) {
-      throw NotFoundException('Not Found');
-    } else {
-      throw NetworkException('Unexpected Error: ${response.statusCode}');
+  static NetworkResponse _handleResponse(Response response) {
+    switch (response.statusCode) {
+      case 200:
+        return NetworkResponse(true, response.statusCode, jsonDecode(response.body),);
+      case 401:
+        throw UnauthorizedException('Unauthorized');
+      case 404:
+        throw NotFoundException('Not Found');
+      default:
+        throw NetworkException('Unexpected Error: ${response.statusCode}');
     }
+
   }
 }
 
@@ -70,24 +63,27 @@ class NotFoundException implements Exception {
 
   @override
   String toString() => message;
-}
+ }
 
 // class NetworkCaller {
 //   /// get request method
 //   static Future<NetworkResponse> getRequest(String url) async {
 //     try {
-//       Response response = await get(Uri.parse(url),
-//           headers: {
-//             // 'token': AuthController.accessToken.toString()
-//           });
+//        Response response = await get(Uri.parse(url),
+//           // headers: {
+//           //   // 'token': AuthController.accessToken.toString()
+//           // }
+//            );
 //       log(response.statusCode.toString());
 //       log(response.body);
 //       if (response.statusCode == 200) {
 //         return NetworkResponse(
 //             true, response.statusCode, jsonDecode(response.body));
-//       } else if (response.statusCode == 401) {
-//         // gotoLogin();
-//       } else {
+//        }
+//         // else if (response.statusCode == 401 || response.statusCode == 404) {
+//       //   // gotoLogin();
+//       // }
+//         else {
 //         return NetworkResponse(false, response.statusCode, null);
 //       }
 //     } catch (e) {
@@ -127,12 +123,12 @@ class NotFoundException implements Exception {
 //     }
 //     return NetworkResponse(false, -1, null);
 //   }
-//
-//   // static Future<void> gotoLogin() async {
-//   //   await AuthController.clear();
-//   //   Navigator.pushAndRemoveUntil(
-//   //       CraftyBay.globalKey.currentContext!,
-//   //       MaterialPageRoute(builder: (context) => const EmailVerificationScreen()),
-//   //           (route) => false);
-//   // }
+// //
+// //   // static Future<void> gotoLogin() async {
+// //   //   await AuthController.clear();
+// //   //   Navigator.pushAndRemoveUntil(
+// //   //       CraftyBay.globalKey.currentContext!,
+// //   //       MaterialPageRoute(builder: (context) => const EmailVerificationScreen()),
+// //   //           (route) => false);
+// //   // }
 // }
