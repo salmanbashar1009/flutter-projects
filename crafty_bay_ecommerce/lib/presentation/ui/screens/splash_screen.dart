@@ -1,3 +1,4 @@
+import 'package:crafty_bay_ecommerce/presentation/state_holders/auth_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/Auth/email_verification_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/main_bottom_nav_bar_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_assets.dart';
@@ -13,18 +14,21 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     super.initState();
     goToNextPage();
   }
 
-  void goToNextPage() {
-    Future.delayed(const Duration(seconds: 2)).then((value) =>
-        Get.offAll(()=> const EmailVerificationScreen(),transition: Transition.rightToLeft,duration: const Duration(milliseconds: 300)));
+  Future<void> goToNextPage() async {
+    await AuthController.getAccessToken();
+    Future.delayed(const Duration(seconds: 2)).then((value) => Get.offAll(
+        () => AuthController.isLoggedIn()
+            ? const MainBottomNavBarScreen()
+            : const EmailVerificationScreen(),
+        transition: Transition.rightToLeft,
+        duration: const Duration(milliseconds: 300)));
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +38,10 @@ class _SplashScreenState extends State<SplashScreen> {
         children: [
           const Spacer(),
           Center(
-              child: SvgPicture.asset(ImageAssets.canvasLogoSVG,
-                width: 150,
-              )),
+              child: SvgPicture.asset(
+            ImageAssets.canvasLogoSVG,
+            width: 150,
+          )),
           const Spacer(),
           const CircularProgressIndicator(),
           const SizedBox(

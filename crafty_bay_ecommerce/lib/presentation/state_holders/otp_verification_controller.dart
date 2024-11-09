@@ -1,6 +1,7 @@
 import 'package:crafty_bay_ecommerce/data/model/network_response.dart';
 import 'package:crafty_bay_ecommerce/data/services/network_caller.dart';
 import 'package:crafty_bay_ecommerce/data/utilities/urls.dart';
+import 'package:crafty_bay_ecommerce/presentation/state_holders/auth_controller.dart';
 import 'package:get/get.dart';
 
 class OTPVerificationController extends GetxController {
@@ -21,7 +22,7 @@ class OTPVerificationController extends GetxController {
     update();
 
     if (response.isSuccess) {
-      status = response.responseBody?["msg"].toString() ?? " " ;
+      AuthController.setAccessToken(response.responseBody!['data']) ?? " ";
       return true;
     } else {
       _message = "Otp verification failed! Try again";

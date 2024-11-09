@@ -183,15 +183,9 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
     final response =
         await controller.verifyOTP(widget.email, _otpTEController.text.trim());
     if (response) {
-      if (controller.status == "success") {
-        Get.offAll(const MainBottomNavBarScreen(),
-            transition: Transition.rightToLeft,
-            duration: const Duration(milliseconds: 300));
-      } else {
-        if (mounted) {
-          showCustomSnackBar(controller.message);
-        }
-      }
+      Get.offAll(const MainBottomNavBarScreen(),
+          transition: Transition.rightToLeft,
+          duration: const Duration(milliseconds: 300));
     } else {
       if (mounted) {
         showCustomSnackBar(controller.message);
