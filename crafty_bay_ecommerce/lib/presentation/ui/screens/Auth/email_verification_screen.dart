@@ -1,4 +1,3 @@
-import 'package:crafty_bay_ecommerce/data/model/network_response.dart';
 import 'package:crafty_bay_ecommerce/presentation/state_holders/email_verification_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/Auth/otp_verification_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/styles/style.dart';
@@ -87,11 +86,11 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                           );
                         }
                         return ElevatedButton(
-                          onPressed: (){
+                          onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               verifyEmail(controller);
-                                }
-                            },
+                            }
+                          },
                           child: const Text(
                             "Next",
                             style: TextStyle(color: Colors.white),
@@ -114,16 +113,15 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
         await controller.verifyEmail(_emailTEController.text.trim());
     if (response) {
       if(controller.status == "success"){
-        Get.to(const OTPVerificationScreen(),
+        Get.to(()=> OTPVerificationScreen(email: _emailTEController.text.trim()),
             transition: Transition.rightToLeft,
             duration: const Duration(milliseconds: 300));
+      }else{
+        if (mounted) {
+          showCustomSnackBar(controller.message);
+        }
       }
-      else{
-        showCustomSnackBar("Email verification failed! Try again");
-      }
-    }
-
-    else {
+    } else {
       if (mounted) {
         showCustomSnackBar(controller.message);
       }
