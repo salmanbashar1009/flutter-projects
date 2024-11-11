@@ -1,3 +1,4 @@
+import 'package:crafty_bay_ecommerce/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/Auth/complete_profile_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/category_list_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/new_product_list_screen.dart';
@@ -79,7 +80,12 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 16,
               ),
-              const HomeSlider(),
+              GetBuilder<HomeSliderController>(builder: (homeSlidercontroller){
+                if(homeSlidercontroller.getHomeSliderInProgress){
+                  return SizedBox(child: Center(child: LinearProgressIndicator(),),);
+                }
+                return  HomeSlider(sliders: homeSlidercontroller.homeSliderModel.data ?? []);
+              }),
               const SizedBox(
                 height: 16,
               ),
