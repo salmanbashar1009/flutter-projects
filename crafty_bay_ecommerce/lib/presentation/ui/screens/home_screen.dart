@@ -1,3 +1,4 @@
+import 'package:crafty_bay_ecommerce/presentation/state_holders/category_list_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/Auth/complete_profile_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/category_list_screen.dart';
@@ -102,12 +103,19 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 110,
-                child: ListView.builder(
-                    itemCount: 10,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return const CatergoryCard();
-                    }),
+                child: GetBuilder<CategoryListController>(
+                  builder: (categoryListcontroller) {
+                    if(categoryListcontroller.getCategoriesInProgress){
+                      return const SizedBox(child: Center(child: CircularProgressIndicator(),),);
+                    }
+                    return ListView.builder(
+                        itemCount: categoryListcontroller.categoryListModel.data?.length ?? 0,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return  CatergoryCard(categoryListData: categoryListcontroller.categoryListModel.data![index],);
+                        });
+                  }
+                ),
               ),
               const SizedBox(
                 height: 10,

@@ -24,7 +24,7 @@ class HomeSliderController extends GetxController{
       update();
       return true;
     } else {
-      _message = "Otp verification failed! Try again";
+      _message = "Data loading failed! Try again.";
       return false;
     }
   }
