@@ -1,15 +1,16 @@
 import 'package:crafty_bay_ecommerce/presentation/state_holders/category_list_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/state_holders/main_bottom_nav_bar_controller.dart';
+import 'package:crafty_bay_ecommerce/presentation/state_holders/new_product_list_controller.dart';
+import 'package:crafty_bay_ecommerce/presentation/state_holders/popular_product_list_controller.dart';
+import 'package:crafty_bay_ecommerce/presentation/state_holders/special_product_list_controller.dart';
+import 'package:crafty_bay_ecommerce/presentation/state_holders/wishi_list_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/cart_list_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/category_list_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/wish_list_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
-import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_assets.dart';
-import 'package:crafty_bay_ecommerce/presentation/ui/widgets/circular_icon_button.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class MainBottomNavBarScreen extends StatefulWidget {
@@ -34,6 +35,10 @@ class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
    WidgetsBinding.instance.addPostFrameCallback((_){
      Get.find<HomeSliderController>().getHomeSlider();
      Get.find<CategoryListController>().getCategories();
+     Get.find<PopularProductListController>().getPopularProducts();
+     Get.find<SpecialProductListController>().getSpecialProducts();
+     Get.find<NewProductListController>().getNewProducts();
+     Get.find<WishListController>().getWishListProducts();
    });
     super.initState();
   }

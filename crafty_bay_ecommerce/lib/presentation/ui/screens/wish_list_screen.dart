@@ -1,4 +1,6 @@
 import 'package:crafty_bay_ecommerce/presentation/state_holders/main_bottom_nav_bar_controller.dart';
+import 'package:crafty_bay_ecommerce/presentation/state_holders/wishi_list_controller.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,16 +32,23 @@ class _WishListScreenState extends State<WishListScreen> {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 4,
-              mainAxisSpacing: 16,
-            ),
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return const FittedBox(child: ProductCard());
-            },
+          child: GetBuilder<WishListController>(
+            builder: (wishListController) {
+              if(wishListController.getWishListInProgress){
+                return const Center(child: CircularProgressIndicator(color: primeColor,backgroundColor: Colors.white,),);
+              }
+              return GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 4,
+                  mainAxisSpacing: 16,
+                ),
+                itemCount: wishListController.wishListModel.data?.length ?? 0,
+                itemBuilder: (context, index) {
+                  return  FittedBox(child: ProductCard(productListData: wishListController.wishListModel.data![index],));
+                },
+              );
+            }
           ),
         ));
   }
