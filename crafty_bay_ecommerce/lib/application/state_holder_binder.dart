@@ -6,7 +6,7 @@ import 'package:crafty_bay_ecommerce/presentation/state_holders/new_product_list
 import 'package:crafty_bay_ecommerce/presentation/state_holders/otp_verification_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/state_holders/popular_product_list_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/state_holders/special_product_list_controller.dart';
-import 'package:crafty_bay_ecommerce/presentation/state_holders/wishi_list_controller.dart';
+import 'package:crafty_bay_ecommerce/presentation/state_holders/wish_list_controller.dart';
 import 'package:get/get.dart';
 
 class StateHolderBinder extends Bindings{

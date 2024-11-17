@@ -1,7 +1,7 @@
 import 'package:crafty_bay_ecommerce/presentation/state_holders/main_bottom_nav_bar_controller.dart';
-import 'package:crafty_bay_ecommerce/presentation/state_holders/wishi_list_controller.dart';
+import 'package:crafty_bay_ecommerce/presentation/state_holders/wish_list_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
-import 'package:crafty_bay_ecommerce/presentation/ui/widgets/product_card.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/widgets/wish_list_product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +13,12 @@ class WishListScreen extends StatefulWidget {
 }
 
 class _WishListScreenState extends State<WishListScreen> {
+  @override
+  void initState() {
+    super.initState();
+      Get.find<WishListController>().getWishListProducts();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,9 +49,9 @@ class _WishListScreenState extends State<WishListScreen> {
                   crossAxisSpacing: 4,
                   mainAxisSpacing: 16,
                 ),
-                itemCount: wishListController.wishListModel.data?.length ?? 0,
+                itemCount: wishListController.wishListModel.data?.length,
                 itemBuilder: (context, index) {
-                  return  FittedBox(child: ProductCard(productListData: wishListController.wishListModel.data![index],));
+                  return  FittedBox(child: WishListProductCard(wishListData: wishListController.wishListModel.data![index] ));
                 },
               );
             }

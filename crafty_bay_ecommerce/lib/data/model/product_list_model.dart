@@ -1,12 +1,12 @@
 import 'package:crafty_bay_ecommerce/data/model/product_data.dart';
 
-class WishListModel {
+class ProductListModel {
   String? msg;
   List<ProductData>? data;
 
-  WishListModel({this.msg, this.data});
+  ProductListModel({this.msg, this.data});
 
-  WishListModel.fromJson(Map<String, dynamic> json) {
+  ProductListModel.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
     if (json['data'] != null) {
       data = <ProductData>[];

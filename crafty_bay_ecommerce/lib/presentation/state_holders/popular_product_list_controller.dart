@@ -6,11 +6,11 @@ import 'package:get/get.dart';
 
 class PopularProductListController extends GetxController{
   bool _getPopularProductsInProgress = false;
-  WishListModel _productListModel = WishListModel();
+  ProductListModel _productListModel = ProductListModel();
   String _message = " " ;
 
   bool get getPopularProductsInProgress => _getPopularProductsInProgress;
-  WishListModel get productListModel => _productListModel;
+  ProductListModel get productListModel => _productListModel;
   String get message => _message;
 
   Future<bool> getPopularProducts()async{
@@ -20,7 +20,7 @@ class PopularProductListController extends GetxController{
     _getPopularProductsInProgress = false;
 
     if(response.isSuccess){
-      _productListModel = WishListModel.fromJson(response.responseBody ?? {});
+      _productListModel = ProductListModel.fromJson(response.responseBody ?? {});
       update();
       return true;
     }else{

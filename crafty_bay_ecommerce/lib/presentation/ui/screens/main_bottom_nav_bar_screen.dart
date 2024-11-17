@@ -4,7 +4,7 @@ import 'package:crafty_bay_ecommerce/presentation/state_holders/main_bottom_nav_
 import 'package:crafty_bay_ecommerce/presentation/state_holders/new_product_list_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/state_holders/popular_product_list_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/state_holders/special_product_list_controller.dart';
-import 'package:crafty_bay_ecommerce/presentation/state_holders/wishi_list_controller.dart';
+import 'package:crafty_bay_ecommerce/presentation/state_holders/wish_list_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/cart_list_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/category_list_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/wish_list_screen.dart';
@@ -38,7 +38,6 @@ class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
      Get.find<PopularProductListController>().getPopularProducts();
      Get.find<SpecialProductListController>().getSpecialProducts();
      Get.find<NewProductListController>().getNewProducts();
-     Get.find<WishListController>().getWishListProducts();
    });
     super.initState();
   }

@@ -6,11 +6,11 @@ import 'package:get/get.dart';
 
 class NewProductListController extends GetxController{
   bool _getNewProductsInProgress = false;
-  WishListModel _productListModel = WishListModel();
+  ProductListModel _productListModel = ProductListModel();
   String _message = " " ;
 
   bool get getNewProductsInProgress => _getNewProductsInProgress;
-  WishListModel get productListModel => _productListModel;
+  ProductListModel get productListModel => _productListModel;
   String get message => _message;
 
   Future<bool> getNewProducts()async{
@@ -20,7 +20,7 @@ class NewProductListController extends GetxController{
     _getNewProductsInProgress = false;
 
     if(response.isSuccess){
-      _productListModel = WishListModel.fromJson(response.responseBody ?? {});
+      _productListModel = ProductListModel.fromJson(response.responseBody ?? {});
       update();
       return true;
     }else{

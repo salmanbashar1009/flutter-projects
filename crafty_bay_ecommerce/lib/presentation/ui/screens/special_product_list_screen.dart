@@ -47,7 +47,7 @@ class _SpecialProductListScreenState extends State<SpecialProductListScreen> {
                 ),
                 itemCount: newProductListController.productListModel.data?.length ?? 0,
                 itemBuilder: (context, index) {
-                  return  FittedBox(child: ProductCard(productListData: newProductListController.productListModel.data![index],));
+                  return  FittedBox(child: ProductCard(productData: newProductListController.productListModel.data![index],));
                 },
               );
             }

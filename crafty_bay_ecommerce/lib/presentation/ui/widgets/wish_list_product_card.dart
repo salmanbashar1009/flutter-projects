@@ -1,15 +1,15 @@
-import 'package:crafty_bay_ecommerce/data/model/product_data.dart';
+import 'package:crafty_bay_ecommerce/data/model/wish_list_data.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/product_details_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProductCard extends StatelessWidget {
-  const ProductCard({
-    super.key, required this.productData
+class WishListProductCard extends StatelessWidget {
+  const WishListProductCard({
+    super.key, required this.wishListData
   });
 
-  final ProductData productData;
+  final WishListData wishListData;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class ProductCard extends StatelessWidget {
                     ),
                     color: primeColor.withOpacity(0.1),
                     image:  DecorationImage(
-                      image: NetworkImage(productData.image ?? " "),
+                      image: NetworkImage(wishListData.product?.image ?? " "),
                         // image: NetworkImage("https://i.pinimg.com/736x/6a/b8/f7/6ab8f71806bd568e4d229658e7e979f6.jpg"),
                         fit: BoxFit.contain
                     )
@@ -50,7 +50,7 @@ class ProductCard extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                     Text(productData.title ?? " ",
+                     Text(wishListData.product?.title ?? " ",
                       maxLines: 1,
                       style: TextStyle(
                           overflow: TextOverflow.ellipsis,
@@ -61,7 +61,7 @@ class ProductCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                         Text("\$${productData.price}",style: TextStyle(
+                         Text("\$${wishListData.product?.price}",style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
                           color: primeColor,
@@ -69,7 +69,7 @@ class ProductCard extends StatelessWidget {
                          Wrap(
                           children: [
                             Icon(Icons.star,size: 15,color: Colors.amber,),
-                            Text(productData.star.toString(),style: TextStyle(
+                            Text("${wishListData.product?.star}",style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
                               color: Colors.blueGrey,

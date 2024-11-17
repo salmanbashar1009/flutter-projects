@@ -15,7 +15,6 @@ import 'package:crafty_bay_ecommerce/presentation/ui/widgets/circular_icon_butto
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/home/home_slider.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/home/section_title.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/product_card.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -142,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         scrollDirection: Axis.horizontal,
                         itemCount: popularProductLlistController.productListModel.data?.length ?? 0 ,
                         itemBuilder: (context, index) {
-                          return ProductCard(productListData: popularProductLlistController.productListModel.data![index],);
+                          return ProductCard(productData: popularProductLlistController.productListModel.data![index],);
                         });
                   }
                 ),
@@ -168,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         scrollDirection: Axis.horizontal,
                         itemCount: specialProductListController.productListModel.data?.length ?? 0,
                         itemBuilder: (context, index) {
-                          return  ProductCard(productListData: specialProductListController.productListModel.data![index] ,);
+                          return  ProductCard(productData: specialProductListController.productListModel.data![index] ,);
                         });
                   }
                 ),
@@ -194,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         scrollDirection: Axis.horizontal,
                         itemCount: newProductListController.productListModel.data?.length ?? 0,
                         itemBuilder: (context, index) {
-                          return  ProductCard(productListData: newProductListController.productListModel.data![index],);
+                          return  ProductCard(productData: newProductListController.productListModel.data![index],);
                         });
                   }
                 ),

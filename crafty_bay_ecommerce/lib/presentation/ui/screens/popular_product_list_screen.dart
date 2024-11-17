@@ -47,7 +47,7 @@ class _PorpularProductListScreenState extends State<PorpularProductListScreen> {
                 ),
                 itemCount: popularProductListController.productListModel.data?.length ?? 0,
                 itemBuilder: (context, index) {
-                  return  FittedBox(child: ProductCard(productListData: popularProductListController.productListModel.data![index],));
+                  return  FittedBox(child: ProductCard(productData: popularProductListController.productListModel.data![index],));
                 },
               );
             }

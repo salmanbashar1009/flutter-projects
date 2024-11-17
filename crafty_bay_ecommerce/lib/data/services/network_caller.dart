@@ -1,5 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:crafty_bay_ecommerce/data/model/network_response.dart';
+import 'package:crafty_bay_ecommerce/presentation/state_holders/auth_controller.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/Auth/email_verification_screen.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart';
 
 class NetworkCaller {
@@ -7,63 +11,60 @@ class NetworkCaller {
   ///get request method
   static Future<NetworkResponse> getRequest(String url) async {
     try {
-      final Response response = await get(Uri.parse(url));
-      return _handleResponse(response);
+      final response = await get(Uri.parse(url),
+          headers: {'data': AuthController.accessToken.toString()});
+      log(response.statusCode.toString());
+      log(response.body);
+      if (response.statusCode == 200) {
+        return NetworkResponse(
+            true, response.statusCode, jsonDecode(response.body));
+      } else if (response.statusCode == 401 || response.statusCode == 404) {
+        Get.off(() => const EmailVerificationScreen());
+        log('try again');
+      } else {
+        return NetworkResponse(false, response.statusCode, null);
+      }
     } catch (e) {
-      throw NetworkException('Network Error: $e');
+      log(e.toString());
     }
+    return NetworkResponse(false, -1, null);
   }
 
   ///post request method
-  static Future<NetworkResponse> postRequest(String url, Map<String, dynamic> body) async {
+  static Future<NetworkResponse> postRequest(String url,
+      Map<String, dynamic> body) async {
     try {
-      final response = await post(Uri.parse(url), body: jsonEncode(body));
-      return _handleResponse(response);
+      final response = await post(Uri.parse(url), body: jsonEncode(body),
+          headers: {'data': AuthController.accessToken.toString()});
+      if (response.statusCode == 200) {
+        return NetworkResponse(
+            true, response.statusCode, jsonDecode(response.body));
+      } else if (response.statusCode == 401 || response.statusCode == 404) {
+        //gotoLoginscreen
+        Get.to(() => const EmailVerificationScreen());
+      }
     } catch (e) {
-      throw NetworkException('Network Error: $e');
+      log(e.toString());
     }
+    return NetworkResponse(false, -1, null);
   }
-  static NetworkResponse _handleResponse(Response response) {
-    switch (response.statusCode) {
-      case 200:
-        return NetworkResponse(true, response.statusCode, jsonDecode(response.body),);
-      case 401:
-        throw UnauthorizedException('Unauthorized');
-      case 404:
-        throw NotFoundException('Not Found');
-      default:
-        throw NetworkException('Unexpected Error: ${response.statusCode}');
-    }
 
-  }
 }
 
-class NetworkException implements Exception {
-  final String message;
 
-  NetworkException(this.message);
 
-  @override
-  String toString() => message;
-}
 
-class UnauthorizedException implements Exception {
-  final String message;
 
-  UnauthorizedException(this.message);
 
-  @override
-  String toString() => message;
-}
 
-class NotFoundException implements Exception {
-  final String message;
 
-  NotFoundException(this.message);
 
-  @override
-  String toString() => message;
- }
+
+
+
+
+
+
 
 // class NetworkCaller {
 //   /// get request method
@@ -131,4 +132,4 @@ class NotFoundException implements Exception {
 // //   //       MaterialPageRoute(builder: (context) => const EmailVerificationScreen()),
 // //   //           (route) => false);
 // //   // }
-// }
+
