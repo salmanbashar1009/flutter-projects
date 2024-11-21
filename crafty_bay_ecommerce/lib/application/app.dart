@@ -1,6 +1,7 @@
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/splash_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
 import 'state_holder_binder.dart';
@@ -18,8 +19,16 @@ class CraftyBay extends StatelessWidget {
         primaryColor: ColorPalette.primarySwatch,
         brightness: Brightness.light,
         colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: MaterialColor(
-                ColorPalette.primarySwatch.value, ColorPalette.color,),),
+          primarySwatch: MaterialColor(
+            ColorPalette.primarySwatch.value,
+            ColorPalette.color,
+          ),
+        ),
+        appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Colors.cyan, // Set your desired color here
+          ),
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
                 backgroundColor: primeColor,

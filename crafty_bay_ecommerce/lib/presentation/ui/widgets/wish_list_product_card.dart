@@ -16,7 +16,7 @@ class WishListProductCard extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(8),
       onTap: (){
-        Get.to(const ProductDetailsScreen());
+        Get.to(ProductDetailsScreen(productId: wishListData.id ?? 0));
       },
       child: Card(
         surfaceTintColor: Colors.white,

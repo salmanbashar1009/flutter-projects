@@ -3,7 +3,8 @@ import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart'
 import 'package:flutter/material.dart';
 
 class ProductDetailsSlider extends StatefulWidget {
-  const ProductDetailsSlider({super.key});
+  const ProductDetailsSlider({super.key, required this.imageList});
+  final List<String> imageList;
 
   @override
   State<ProductDetailsSlider> createState() => _ProductDetailsSliderState();
@@ -14,43 +15,42 @@ class _ProductDetailsSliderState extends State<ProductDetailsSlider> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
       children: [
-        CarouselSlider(
-          options: CarouselOptions(
-              viewportFraction: 1,
-              height: 300,
-              aspectRatio: 16 / 9,
-              autoPlay: false,
-              onPageChanged: (int page, _) {
-                _selectedSlider.value = page;
-              }),
-          items: [1, 2, 3, 4, 5].map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Container(
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.3),
-                    ),
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: SizedBox(
-                          height: 200,
-                          width: 200,
-                          child: Image.asset(
-                            "assets/images/shoe.png",
-                            fit: BoxFit.cover,
-                          )),
-                    ));
-              },
-            );
-          }).toList(),
+        Stack(
+          children: [
+            CarouselSlider(
+              options: CarouselOptions(
+                  viewportFraction: 1,
+                  height: 260,
+                  aspectRatio: 16 / 9,
+                  autoPlay: false,
+                  onPageChanged: (int page, _) {
+                    _selectedSlider.value = page;
+                  }),
+              items: widget.imageList.map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.withOpacity(0.3),
+                          image: DecorationImage(
+                            image: NetworkImage(i)
+                          )
+                        ),
+                        alignment: Alignment.center,
+                        );
+                  },
+                );
+              }).toList(),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+          ],
         ),
-        const SizedBox(
-          height: 16,
-        ),
+        SizedBox(height: 12),
         Positioned(
           bottom: 10,
           left: 0,
@@ -66,7 +66,7 @@ class _ProductDetailsSliderState extends State<ProductDetailsSlider> {
                   margin: const EdgeInsets.symmetric(horizontal: 3),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      color: value == i ? primeColor : Colors.white),
+                      color: value == i ? primeColor : Colors.grey),
                 ));
               }
               return Row(

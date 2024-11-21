@@ -24,7 +24,8 @@ class WishListController extends GetxController{
       return true;
     }else{
       _message = "Data loading failed! Try again.";
-          return false;
+      update();
+      return false;
     }
   }
 }
