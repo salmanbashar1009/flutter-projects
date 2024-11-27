@@ -16,7 +16,6 @@ class CraftyBay extends StatelessWidget {
       home: const SplashScreen(),
       initialBinding: StateHolderBinder(),
       theme: ThemeData(
-        primaryColor: ColorPalette.primarySwatch,
         brightness: Brightness.light,
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: MaterialColor(

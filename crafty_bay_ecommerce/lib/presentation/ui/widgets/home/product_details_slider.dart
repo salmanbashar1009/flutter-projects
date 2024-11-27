@@ -35,6 +35,12 @@ class _ProductDetailsSliderState extends State<ProductDetailsSlider> {
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           color: Colors.grey.withOpacity(0.3),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              spreadRadius: 1
+                            )
+                          ],
                           image: DecorationImage(
                             image: NetworkImage(i)
                           )
@@ -51,28 +57,23 @@ class _ProductDetailsSliderState extends State<ProductDetailsSlider> {
           ],
         ),
         SizedBox(height: 12),
-        Positioned(
-          bottom: 10,
-          left: 0,
-          right: 0,
-          child: ValueListenableBuilder(
-            valueListenable: _selectedSlider,
-            builder: (context, value, _) {
-              List<Widget> list = [];
-              for (int i = 0; i < 5; i++) {
-                list.add(Container(
-                  width: 12,
-                  height: 12,
-                  margin: const EdgeInsets.symmetric(horizontal: 3),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color: value == i ? primeColor : Colors.grey),
-                ));
-              }
-              return Row(
-                  mainAxisAlignment: MainAxisAlignment.center, children: list);
-            },
-          ),
+        ValueListenableBuilder(
+          valueListenable: _selectedSlider,
+          builder: (context, value, _) {
+            List<Widget> list = [];
+            for (int i = 0; i < 5; i++) {
+              list.add(Container(
+                width: 12,
+                height: 12,
+                margin: const EdgeInsets.symmetric(horizontal: 3),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: value == i ? primeColor : Colors.grey),
+              ));
+            }
+            return Row(
+                mainAxisAlignment: MainAxisAlignment.center, children: list);
+          },
         ),
       ],
     );

@@ -2,16 +2,16 @@ import 'package:crafty_bay_ecommerce/data/model/Product_details.dart';
 
 class ProductDetailsModel {
   String? msg;
-  List<ProductDetails>? data;
+  List<ProductDetailsData>? data;
 
   ProductDetailsModel({this.msg, this.data});
 
   ProductDetailsModel.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
     if (json['data'] != null) {
-      data = <ProductDetails>[];
+      data = <ProductDetailsData>[];
       json['data'].forEach((v) {
-        data!.add(ProductDetails.fromJson(v));
+        data!.add(ProductDetailsData.fromJson(v));
       });
     }
   }

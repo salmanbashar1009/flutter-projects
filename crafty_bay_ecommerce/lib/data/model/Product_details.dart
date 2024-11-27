@@ -1,6 +1,6 @@
 import 'package:crafty_bay_ecommerce/data/model/product_data.dart';
 
-class ProductDetails {
+class ProductDetailsData {
   int? id;
   String? img1;
   String? img2;
@@ -14,7 +14,7 @@ class ProductDetails {
   String? updatedAt;
   ProductData? product;
 
-  ProductDetails(
+  ProductDetailsData(
       {this.id,
         this.img1,
         this.img2,
@@ -28,7 +28,7 @@ class ProductDetails {
         this.updatedAt,
         this.product});
 
-  ProductDetails.fromJson(Map<String, dynamic> json) {
+  ProductDetailsData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     img1 = json['img1'];
     img2 = json['img2'];

@@ -1,4 +1,5 @@
 import 'package:crafty_bay_ecommerce/data/model/Product_details.dart';
+import 'package:crafty_bay_ecommerce/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/state_holders/product_details_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/review_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
@@ -36,38 +37,107 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     return Scaffold(
       body: GetBuilder<ProductDetailsController>(
           builder: (productDetailsController) {
-        if (productDetailsController.getProductDetailsInProgress) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        return SafeArea(
-          child: Column(
-            children: [
-              productDetailsAppBar,
-              ProductDetailsSlider(
-                imageList: [
-                  productDetailsController.productDetails.img1 ?? "",
-                  productDetailsController.productDetails.img2 ?? "",
-                  productDetailsController.productDetails.img3 ?? "",
-                  productDetailsController.productDetails.img3 ?? "",
+            if (productDetailsController.getProductDetailsInProgress) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return SafeArea(
+              child: Column(
+                children: [
+                  productDetailsAppBar,
+                  ProductDetailsSlider(
+                    imageList: [
+                      productDetailsController.productDetails.img1 ?? "",
+                      productDetailsController.productDetails.img2 ?? "",
+                      productDetailsController.productDetails.img3 ?? "",
+                      productDetailsController.productDetails.img3 ?? "",
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: productDetails(
+                          productDetailsController.productDetails,
+                          productDetailsController.productColor),
+                    ),
+                  ),
+                  // Container(
+                  //   height: 80,
+                  //   decoration: BoxDecoration(
+                  //       color: primeColor.withOpacity(0.15),
+                  //       borderRadius: BorderRadius.circular(24)),
+                  //   child: Center(
+                  //     child: Padding(
+                  //       padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  //       child: ListTile(
+                  //         title: Text(
+                  //           "Price:",
+                  //           style: Theme
+                  //               .of(context)
+                  //               .textTheme
+                  //               .titleMedium!
+                  //               .copyWith(fontSize: 16),
+                  //         ),
+                  //         subtitle: Text(
+                  //           "\$100:",
+                  //           style: Theme
+                  //               .of(context)
+                  //               .textTheme
+                  //               .titleLarge!
+                  //               .copyWith(color: primeColor),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // )
+                  cartBottomContainer(productDetailsController.productDetails,productDetailsController.productColor,productDetailsController.productSized)
                 ],
               ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: productDetails(productDetailsController.productDetails,
-                      productDetailsController.productColor),
-                ),
-              ),
-              cartBottomContainer()
-            ],
-          ),
-        );
-      }),
+            );
+          }),
+      // floatingActionButton: SizedBox(
+      //     width: 100,
+      //     height: 40,
+      //     child:
+      //         GetBuilder<AddToCartController>(builder: (addToCartController) {
+      //       if (addToCartController.addToCartInProgress) {
+      //         return Center(
+      //           child: CircularProgressIndicator(),
+      //         );
+      //       }
+      //       return FloatingActionButton(
+      //         onPressed: () async {
+      //           final result = await addToCartController.addToCart(
+      //               ProductDetailsData().product?.id ?? 0,
+      //               ProductDetailsData().color ?? " ",
+      //               ProductDetailsData().size ?? "",
+      //               quantity);
+      //
+      //           if ( result) {
+      //             Get.snackbar("Done!", "This product has been added.",
+      //                 snackPosition: SnackPosition.BOTTOM);
+      //             Get.to(()=> const CartListScreen());
+      //           }
+      //         },
+      //         shape: RoundedRectangleBorder(
+      //             borderRadius: BorderRadius.circular(5)),
+      //         child: Text(
+      //           "add to cart",
+      //           style: Theme.of(context)
+      //               .textTheme
+      //               .titleMedium!
+      //               .copyWith(color: Colors.white),
+      //         ),
+      //       );
+      //     })),
     );
   }
 
-  Padding productDetails(ProductDetails productDetails, List<String> colors) {
+  Padding productDetails(ProductDetailsData productDetails,
+      List<String> colors) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -159,9 +229,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             child: SizedBox(
               height: 35,
               child: CustomPicker(productDetails.color?.split(",") ?? [],
-                  (int selectedIndex) {
-                _selectedColorIndex = selectedIndex;
-              }, 0),
+                      (int selectIndex) {
+                    _selectedColorIndex = selectIndex;
+                  }, 0),
             ),
           ),
           const SizedBox(
@@ -194,17 +264,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           const SizedBox(
             height: 8,
           ),
-          Text(
-              '''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus, neque a ullamcorper molestie, ex nisl aliquet lectus, vel volutpat mi nisi vel velit. Maecenas id mauris purus. Suspendisse a malesuada neque, malesuada vulputate lorem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam quis facilisis elit, ut rutrum nibh. Ut suscipit, dolor eget lobortis dapibus, arcu ligula pharetra tortor, vel dapibus justo leo id velit. Aenean laoreet nisi ut turpis ullamcorper ornare.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus, neque a ullamcorper molestie, ex nisl aliquet lectus, vel volutpat mi nisi vel velit. Maecenas id mauris purus. Suspendisse a malesuada neque, malesuada vulputate lorem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam quis facilisis elit, ut rutrum nibh. Ut suscipit, dolor eget lobortis dapibus, arcu ligula pharetra tortor, vel dapibus justo leo id velit. Aenean laoreet nisi ut turpis ullamcorper ornare. ''',
+          Text(productDetails.product?.shortDes ?? "",
               style: smallTextStyle(Colors.black38)),
         ],
       ),
     );
   }
 
-  Container cartBottomContainer() {
+  Container cartBottomContainer(ProductDetailsData productDetails,
+      List<String> colors,
+      List<String> sizes,) {
     return Container(
       height: 100,
+      width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 24),
       decoration: BoxDecoration(
           color: primeColor.withOpacity(0.15),
@@ -227,20 +299,101 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
             ],
           ),
-          ElevatedButton(
-              onPressed: () {},
-              child: Text(
-                "Add To Cart",
-                style: smallTextStyle(Colors.white),
-              ))
+          SizedBox(
+            child: GetBuilder<AddToCartController>(
+                builder: (addToCartController) {
+                  if (addToCartController.addToCartInProgress) {
+                    return Center(child: CircularProgressIndicator(),);
+                  }
+                  return ElevatedButton(
+                      onPressed: () async {
+                        final result =await addToCartController.addToCart(
+                            productDetails.productId!,
+                            colors[_selectedColorIndex],
+                            sizes[_selectedSizeIndex], quantity);
+
+                        if(result){
+                          Get.snackbar("Done", "Added to cart");
+                        }
+                      },
+                      child: Text(
+                        "add to cart",
+                        style: TextStyle(color: Colors.white),
+                      ));
+                }
+            ),
+          )
         ],
+      ),
+    );
+  }
+
+  Container addToCartBottomcontainer() {
+    return Container(
+      width: MediaQuery
+          .of(context)
+          .size
+          .width,
+      height: 100,
+      decoration: BoxDecoration(
+          color: primeColor.withOpacity(0.15),
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(16),
+            topLeft: Radius.circular(16),
+          )),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Text(
+                    "Price",
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .titleMedium!
+                        .copyWith(fontSize: 18),
+                  ),
+                ),
+                Expanded(
+                  child: Text("\$100",
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .titleLarge!
+                          .copyWith(color: primeColor)),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 35,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text('Add to cart', style: Theme
+                    .of(context)
+                    .textTheme
+                    .titleMedium!
+                    .copyWith(
+                    color: Colors.white
+                ),),
+              ),
+            )
+
+
+          ],
+        ),
       ),
     );
   }
 
   AppBar get productDetailsAppBar {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white70,
       surfaceTintColor: Colors.transparent,
       leading: Padding(
         padding: const EdgeInsets.only(left: 12.0),

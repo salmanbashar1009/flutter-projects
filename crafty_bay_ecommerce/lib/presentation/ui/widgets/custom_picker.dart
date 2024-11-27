@@ -6,8 +6,9 @@ class CustomPicker extends StatefulWidget {
    final Function(int selectIndex) onSelected;
    final int initialSelected;
 
+
   const CustomPicker(this.pickerName, this.onSelected, this.initialSelected,
-      {super.key});
+      {super.key,});
 
 
 
@@ -39,12 +40,13 @@ class _CustomPickerState extends State<CustomPicker> {
               }
             },
             child: Container(
+              width: 60,
               padding: EdgeInsets.symmetric(horizontal: 8),
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(5),
-                  color: _selectedIndex == index ? primeColor : null),
-              child: Text(widget.pickerName[index]),
+                  color: _selectedIndex == index ? ColorPalette.primarySwatch: null),
+              child: Center(child: Text(widget.pickerName[index])),
             ),
           );
         },

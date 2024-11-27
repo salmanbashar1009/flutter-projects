@@ -1,3 +1,4 @@
+
 import 'package:crafty_bay_ecommerce/data/model/Product_details.dart';
 import 'package:crafty_bay_ecommerce/data/model/network_response.dart';
 import 'package:crafty_bay_ecommerce/data/model/product_details_model.dart';
@@ -7,15 +8,15 @@ import 'package:get/get.dart';
 
 class ProductDetailsController extends GetxController {
   bool _getProductDetailsInProgress = false;
-  ProductDetails _productDetails = ProductDetails();
+  ProductDetailsData _productDetails = ProductDetailsData();
   String _message = " ";
 
-  final List<String> _productColors = [];
+   List<String> _productColors = [];
   List<String> _productSizes = [];
 
   bool get getProductDetailsInProgress => _getProductDetailsInProgress;
 
-  ProductDetails get productDetails => _productDetails;
+  ProductDetailsData get productDetails => _productDetails;
 
   String get message => _message;
 
@@ -43,7 +44,6 @@ class ProductDetailsController extends GetxController {
   }
 
   void _convertStringToColors(String color) {
-    _productColors.clear();
     final List<String> splittedColor = color.split(",");
     for(String c in splittedColor){
       if(c.isNotEmpty){
