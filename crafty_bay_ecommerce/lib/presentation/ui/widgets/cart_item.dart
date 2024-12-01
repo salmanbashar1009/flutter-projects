@@ -1,15 +1,13 @@
+import 'package:crafty_bay_ecommerce/data/model/cart_data.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/style.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/custom_stepper.dart';
 import 'package:flutter/material.dart';
 
-class CartItem extends StatefulWidget {
-  const CartItem({super.key});
+class CartItem extends StatelessWidget {
 
-  @override
-  State<CartItem> createState() => _CartItemState();
-}
+  final CartData cartData;
+  CartItem({super.key, required this.cartData,});
 
-class _CartItemState extends State<CartItem> {
   int quantity = 1;
 
   @override
@@ -31,16 +29,14 @@ class _CartItemState extends State<CartItem> {
               width: 120,
               height: 110,
               child: Container(
-                decoration: const BoxDecoration(
+                decoration:  BoxDecoration(
                     color: Colors.cyan,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(6),
                       bottomLeft: Radius.circular(6),
                     ),
                     image: DecorationImage(
-                        image: AssetImage(
-                          "assets/images/shoe.png",
-                        ),
+                        image: NetworkImage(cartData.product?.image ?? ' '),
                         fit: BoxFit.contain,
                         alignment: Alignment.center)),
               ),
@@ -65,7 +61,7 @@ class _CartItemState extends State<CartItem> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "New Year Special Offer!",
+                                cartData.product?.title ?? '',
                                 style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.black.withOpacity(0.6),
@@ -80,9 +76,9 @@ class _CartItemState extends State<CartItem> {
                                   textAlign: TextAlign.start,
                                   text: TextSpan(
                                       style: smallTextStyle(Colors.black45),
-                                      children: const [
-                                        TextSpan(text: "Color: Red  "),
-                                        TextSpan(text: "Size: XL"),
+                                      children:  [
+                                        TextSpan(text: cartData.color),
+                                        TextSpan(text: cartData.size),
                                       ]))
                             ],
                           ),
@@ -101,8 +97,8 @@ class _CartItemState extends State<CartItem> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const Text(
-                          "\$100",
+                         Text(
+                          "\$${cartData.product?.price}",
                           style: TextStyle(
                               color: Colors.cyan,
                               fontWeight: FontWeight.w700,
@@ -115,7 +111,7 @@ class _CartItemState extends State<CartItem> {
                             stepValue: 1,
                             value: 1,
                             onChange: (newValue) {
-                              int quantity = newValue;
+                               quantity = newValue;
                             }),
                       ],
                     ),

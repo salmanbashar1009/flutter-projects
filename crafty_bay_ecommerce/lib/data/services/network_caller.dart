@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:crafty_bay_ecommerce/data/model/network_response.dart';
 import 'package:crafty_bay_ecommerce/presentation/state_holders/auth_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/Auth/email_verification_screen.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/main_bottom_nav_bar_screen.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 
@@ -19,7 +20,7 @@ class NetworkCaller {
         return NetworkResponse(
             true, response.statusCode, jsonDecode(response.body));
       } else if (response.statusCode == 401 || response.statusCode == 404) {
-        Get.off(() => const EmailVerificationScreen());
+        Get.off(() => const MainBottomNavBarScreen());
         log('try again');
       } else {
         return NetworkResponse(false, response.statusCode, null);
@@ -41,7 +42,7 @@ class NetworkCaller {
             true, response.statusCode, jsonDecode(response.body));
       } else if (response.statusCode == 401 || response.statusCode == 404) {
         //gotoLoginscreen
-        Get.to(() => const EmailVerificationScreen());
+        Get.to(() => const MainBottomNavBarScreen());
       }
     } catch (e) {
       log(e.toString());

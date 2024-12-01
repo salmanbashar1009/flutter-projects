@@ -1,5 +1,6 @@
 import 'package:crafty_bay_ecommerce/presentation/state_holders/category_list_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/state_holders/main_bottom_nav_bar_controller.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/product_list_by_category_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/widgets/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,7 +40,9 @@ class CategoryListScreen extends StatelessWidget {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4, mainAxisSpacing: 16),
                   itemBuilder: (context, index) {
-                    return  FittedBox(child: CatergoryCard(categoryListData:categoryListController.categoryListModel.data![index] ,));
+                    return  FittedBox(child: CatergoryCard(categoryListData:categoryListController.categoryListModel.data![index],onTap: (){
+                      Get.to(()=> ProductListByCategoryScreen(categoryId: categoryListController.categoryListModel.data![index].id,));
+                    },));
                   });
             }
           ),

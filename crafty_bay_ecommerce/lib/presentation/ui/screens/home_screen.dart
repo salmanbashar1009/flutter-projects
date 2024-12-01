@@ -9,6 +9,7 @@ import 'package:crafty_bay_ecommerce/presentation/ui/screens/Auth/email_verifica
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/category_list_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/new_product_list_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/popular_product_list_screen.dart';
+import 'package:crafty_bay_ecommerce/presentation/ui/screens/product_list_by_category_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/screens/special_product_list_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay_ecommerce/presentation/ui/utility/image_assets.dart';
@@ -127,7 +128,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (context, index) {
                             return CatergoryCard(
                               categoryListData: categoryListcontroller
-                                  .categoryListModel.data![index],);
+                                  .categoryListModel.data![index],onTap: (){
+                              Get.to(()=> ProductListByCategoryScreen(categoryId: categoryListcontroller.categoryListModel.data![index].id,));
+                            },);
                           });
                     }
                 ),
