@@ -1,27 +1,30 @@
+import 'dart:convert';
+
+import 'package:crafty_bay_ecommerce/data/model/verification_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController{
- static String? _accessToken;
+ VerficationModel _accessToken = VerficationModel();
 
- static String? get accessToken => _accessToken;
+ VerficationModel get accessToken => _accessToken;
 
- static Future<void> setAccessToken(String token)async{
+  Future<void> setAccessToken(VerficationModel token)async{
   final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-   await sharedPreferences.setString("access_token", token);
+   await sharedPreferences.setString("access_token", jsonEncode(token.toJson()));
    _accessToken = token;
  }
 
- static Future<void> getAccessToken()async{
+  Future<void> getAccessToken()async{
    final SharedPreferences sharedPreferences =await SharedPreferences.getInstance();
-   _accessToken = sharedPreferences.getString("access_token");
+   String? token = sharedPreferences.getString("access_token");
  }
 
- static Future<void> clear()async{
+  Future<void> clear()async{
    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
    await sharedPreferences.clear();
  }
 
- static bool isLoggedIn(){
+  bool isLoggedIn(){
    return _accessToken != null;
  }
 

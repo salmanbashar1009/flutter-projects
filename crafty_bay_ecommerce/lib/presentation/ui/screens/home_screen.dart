@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             CircularIconButton(icon: Icons.notifications, onTap: () {}),
             CircularIconButton(icon: Icons.refresh, onTap: () {
-              AuthController.clear();
+              AuthController().clear();
               Get.offAll(() => const EmailVerificationScreen());
             }),
           ],

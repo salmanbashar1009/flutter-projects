@@ -22,7 +22,8 @@ class OTPVerificationController extends GetxController {
     update();
 
     if (response.isSuccess) {
-      AuthController.setAccessToken(response.responseBody!['data']) ?? " ";
+      // AuthController.setAccessToken(response.responseBody!['data']) ?? " ";
+      AuthController().setAccessToken(response.responseBody!['data']);
       return true;
     } else {
       _message = "Otp verification failed! Try again";

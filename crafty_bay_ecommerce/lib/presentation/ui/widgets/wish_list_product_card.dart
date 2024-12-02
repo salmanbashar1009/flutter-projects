@@ -16,7 +16,9 @@ class WishListProductCard extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(8),
       onTap: (){
-        Get.to(ProductDetailsScreen(productId: wishListData.id ?? 0));
+        if(wishListData.id != null){
+          Get.to(ProductDetailsScreen(productId: wishListData.id!));
+        }
       },
       child: Card(
         surfaceTintColor: Colors.white,
@@ -39,7 +41,7 @@ class WishListProductCard extends StatelessWidget {
                     ),
                     color: primeColor.withOpacity(0.1),
                     image:  DecorationImage(
-                      image: NetworkImage(wishListData.product?.image ?? " "),
+                      image: NetworkImage(wishListData.product?.image ?? "https://i.pinimg.com/736x/6a/b8/f7/6ab8f71806bd568e4d229658e7e979f6.jpg"),
                         // image: NetworkImage("https://i.pinimg.com/736x/6a/b8/f7/6ab8f71806bd568e4d229658e7e979f6.jpg"),
                         fit: BoxFit.contain
                     )
@@ -50,7 +52,7 @@ class WishListProductCard extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                     Text(wishListData.product?.title ?? " ",
+                     Text(wishListData.product?.title ?? "Unknown",
                       maxLines: 1,
                       style: TextStyle(
                           overflow: TextOverflow.ellipsis,
@@ -61,7 +63,7 @@ class WishListProductCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                         Text("\$${wishListData.product?.price}",style: TextStyle(
+                         Text("\$${wishListData.product?.price.toString() ?? "0"}",style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
                           color: primeColor,
@@ -69,7 +71,7 @@ class WishListProductCard extends StatelessWidget {
                          Wrap(
                           children: [
                             Icon(Icons.star,size: 15,color: Colors.amber,),
-                            Text("${wishListData.product?.star}",style: TextStyle(
+                            Text(wishListData.product?.star?.toString() ?? "0",style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
                               color: Colors.blueGrey,

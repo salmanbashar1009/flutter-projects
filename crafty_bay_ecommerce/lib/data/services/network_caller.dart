@@ -13,7 +13,7 @@ class NetworkCaller {
   static Future<NetworkResponse> getRequest(String url) async {
     try {
       final response = await get(Uri.parse(url),
-          headers: {'data': AuthController.accessToken.toString()});
+          headers: {'data': AuthController().accessToken.data ?? ''});
       log(response.statusCode.toString());
       log(response.body);
       if (response.statusCode == 200) {
@@ -36,7 +36,7 @@ class NetworkCaller {
       Map<String, dynamic> body) async {
     try {
       final response = await post(Uri.parse(url), body: jsonEncode(body),
-          headers: {'data': AuthController.accessToken.toString()});
+          headers: {'data': AuthController().accessToken.data ?? ''});
       if (response.statusCode == 200) {
         return NetworkResponse(
             true, response.statusCode, jsonDecode(response.body));
