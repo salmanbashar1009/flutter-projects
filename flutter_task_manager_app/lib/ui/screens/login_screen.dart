@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Get.offAll(const TaskViewNavBarScreen());
                                 }else{
                                   Get.snackbar("Sorry!!", "Login failed!",
-                                    backgroundColor: Colors.green,
+                                    backgroundColor: Colors.red,
                                     colorText: Colors.white,);
                                 }
                               });

@@ -11,7 +11,7 @@ class LoginController extends GetxController {
 
   bool get isLoginProgress => _isLoginProgress;
 
-  Future<bool> userLogin(String email, String password) async {
+  Future<bool> userLogin(String email, String password)async{
     _isLoginProgress = true;
     update();
 
@@ -24,7 +24,7 @@ class LoginController extends GetxController {
     update();
 
     if (response.isSuccess) {
-      LoginModel model = LoginModel.fromJson(response.body!);
+      LoginModel model =LoginModel.fromJson(response.body!);
       await AuthUtility.saveUserInfo(model);
 
       Get.offAll(const TaskViewNavBarScreen(),

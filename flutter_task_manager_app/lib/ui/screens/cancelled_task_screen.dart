@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task_manager_app/data/utils/urls.dart';
+import 'package:flutter_task_manager_app/ui/state_managers/delete_task_controller.dart';
 import 'package:flutter_task_manager_app/ui/state_managers/get_tasks_controller.dart';
 import 'package:flutter_task_manager_app/ui/widgets/screen_background.dart';
 import 'package:flutter_task_manager_app/ui/widgets/task_list_tile.dart';
@@ -17,6 +18,7 @@ class _CancelledTaskScreenState extends State<CancelledTaskScreen> {
   // TaskListModel _taskListModel = TaskListModel();
 
   final GetTasksController _getTasksController = Get.find<GetTasksController>();
+  final DeleteTaskController _deleteTaskController = Get.find<DeleteTaskController>();
 
   @override
   void initState() {
@@ -83,7 +85,9 @@ class _CancelledTaskScreenState extends State<CancelledTaskScreen> {
                       child: Text('No data available'));
                 }
                 return TaskListTile(
-                  onDeleteTap: () {},
+                  onDeleteTap: () {
+                    deleteAlertDialogue(index);
+                  },
                   onEditTap: () {},
                   data: getTasksController.taskListModel.data![index],
                 );
@@ -100,4 +104,51 @@ class _CancelledTaskScreenState extends State<CancelledTaskScreen> {
       ),
     );
   }
+  void deleteAlertDialogue(int index) {
+    Get.dialog(
+      AlertDialog(
+        title: const Text(
+          "Alert!",
+          style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+        ),
+        content: const Text("Do you want to delete this item?"),
+        actions: [
+          TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: const Text("No")),
+          TextButton(
+            onPressed: () {
+              Get.back();
+              _deleteTaskController
+                  .deleteTask(
+                  _getTasksController.taskListModel.data![index].sId!)
+                  .then((value) {
+                _getTasksController.getUpdateState();
+                if (value) {
+                  Get.snackbar(
+                    "Success",
+                    "Task is deleted",
+                    backgroundColor: Colors.green,
+                    colorText: Colors.white,
+                    borderRadius: 10,
+                  );
+                }else {
+                  Get.snackbar("Failed!", "Error occured!",
+                      backgroundColor: Colors.red,
+                      borderRadius: 10,
+                      colorText: Colors.white
+                  );
+                }
+              });
+            },
+            child: const Text("Yes"),
+          )
+        ],
+      ),
+    );
+  }
 }
+
+
